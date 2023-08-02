@@ -1,0 +1,29 @@
+{
+  "name": "react-native-good-navigation",
+  "version": "1.0.0",
+  "description": "An implementation of react-native stack that allows screens to be added and navigated to at runtime",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AntonyLoose/react-native-good-navigation.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AntonyLoose/react-native-good-navigation/issues"
+  },
+  "homepage": "https://github.com/AntonyLoose/react-native-good-navigation#readme",
+  "peerDependencies": {
+    "react": "^18.2.0",
+    "react-native": "^0.72.3"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.18",
+    "@types/react-native": "^0.72.2",
+    "typescript": "^5.1.6"
+  }
+}

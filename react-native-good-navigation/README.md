@@ -51,5 +51,6 @@ interface TabbarProps {
   iconColor?: string,
   focusedIconColor?: string,
   iconSize?: number;
+  labelStyle?: TextStyle;
 }
 ```

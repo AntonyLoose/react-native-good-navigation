@@ -9,7 +9,10 @@ This is the type passed into the navigators, the navigators will render the scre
 
 ```typescript
 type Tab = {
-  screen: React.FC,
+  screen: {
+      component: React.FC<ScreenProps>,
+      title: string
+  },
   label?: string,
   overrideTabbarLabelStyle?: ViewStyle,
   tabbarStyle?: ViewStyle, // allows you to have seperate styles for each tab in tabbar
@@ -42,9 +45,11 @@ interface TabbarProps {
   headerStyle?: ViewStyle,
   titleStyle?: ViewStyle,
   backIcon?: string,
-  backIconStyle?: string,
+  backIconStyle?: ViewStyle,
+  backIconColor?: string,
+  backIconSize?: number,
   iconColor?: string,
-  focusedIconColor?: string
+  focusedIconColor?: string,
+  iconSize?: number;
 }
 ```
-

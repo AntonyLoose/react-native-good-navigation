@@ -6,6 +6,13 @@ export interface ScreenProps {
     navigation: NavigationProp<ParamListBase>;
 }
 
+export type IconType = {
+    icon: string,
+    color?: string,
+    size?: number,
+    style?: ViewStyle
+}
+
 /**
  * This is the object the navigators take in.
  * Use this type to set the initial tabs for navigation.
@@ -17,19 +24,33 @@ export type Tab = {
     },
     label?: string,
     overrideTabbarLabelStyle?: TextStyle,
-    tabbarStyle?: ViewStyle, // allows you to have seperate styles for each tab in tabbar
+    tabbarStyle?: { // allows you to have seperate styles for each tab in tabbar
+      focused: ViewStyle,
+      unFocused: ViewStyle
+    }
     overrideDrawerLabelStyle?: TextStyle, 
-    drawerStyle?: ViewStyle, // allows you to have seperate styles for each tab in drawer
+    drawerStyle?: { // allows you to have seperate styles for each tab in drawer
+      focused: ViewStyle, 
+      unFocused: ViewStyle
+    },
     icon?: {
       focused: string,
       unfocused: string,
-      size?: number,
-      overrideColor?: string, 
-      overrideFocusedColor?: string
+      tabbarStyle?: {
+        size?: number,
+        overrideColor?: string, 
+        overrideFocusedColor?: string
+      },
+      drawerStyle?: {
+        size?: number,
+        overrideColor?: string, 
+        overrideFocusedColor?: string
+      }
     },
     sidebar?: {
       title: string,
       titleStyle?: TextStyle,
       component: React.FC,
+      style?: ViewStyle;
     }
 }

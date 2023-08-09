@@ -1,11 +1,13 @@
 import { createStackNavigator } from "@react-navigation/stack";
-import { useState } from "react";
-import { Pressable, TextStyle, View, ViewStyle } from "react-native"
+import { useEffect, useState } from "react";
+import { Platform, Pressable, TextStyle, View, ViewStyle } from "react-native"
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Text } from "react-native"
 import { Header } from "../components/Header";
 import { PressableIcon } from "../components/PressableIcon";
-import { IconType, Tab, Theme } from "./types"
+import { IconType, Screen, Tab, Theme } from "./types"
+import { NavigationStateManager } from "../state/NavigationStateManager";
+import { NavigationSession } from "../state/NavigationSession";
 
 export interface TabNavigatorProps {
     tabs: Tab[],
@@ -34,10 +36,24 @@ export const TabNavigator: React.FC<TabNavigatorProps> = ({
 }) => {
 
     const [activeTab, setActiveTab] = useState<Tab>(tabs[0]);
+    const [screens, setScreens] = useState<Screen[]>([activeTab.screen]);
+
+    useEffect(() => {
+        NavigationSession.inst.addScreen(activeTab.screen);
+        NavigationStateManager.screenStackUpdated.subscribe(() => {
+            setScreens([...NavigationSession.inst.screens]);
+        })
+    }, [])
+    
+    useEffect(() => {
+        NavigationSession.inst.navigateOnLoad();
+        NavigationSession.inst.navigateOnLoad = () => {};
+    }, [screens])
 
     const Stack = createStackNavigator();
     
     const onTabPress = (tab: Tab) => {
+        NavigationSession.inst.clearScreens(tab.screen);
         setActiveTab(tab);
     }
 
@@ -49,16 +65,17 @@ export const TabNavigator: React.FC<TabNavigatorProps> = ({
         >
             <Stack.Navigator>
                 {
-                    tabs.map((tab, i) => {
+                    screens.map((screen, i) => {
                         return (
                             <Stack.Screen
-                                key={tab.screen.title}
-                                name={tab.screen.title}
-                                component={tab.screen.component}
+                                key={screen.id}
+                                name={screen.title}
+                                component={screen.component}
                                 options={({ navigation }) => ({
+                                    animationEnabled: i > 0 && !(Platform.OS == "web"),
                                     header: () => (
                                         <Header
-                                            title={tab.screen.title}
+                                            title={screen.title}
                                             isNotFirstScreen={i > 0}
                                             style={headerStyle || { backgroundColor: theme?.background }}
                                             titleStyle={titleStyle || { color: theme?.text }}

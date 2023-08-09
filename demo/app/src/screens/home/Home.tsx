@@ -1,6 +1,8 @@
 import { NavigationProp, ParamListBase } from "@react-navigation/native";
-import { Text, View } from "react-native"
+import { Button, Text, View } from "react-native"
+import { NavigationSession } from "../../state/NavigationSession";
 import { theme } from "../../styles";
+import { Account } from "../Account";
 
 interface Props {
     navigation: NavigationProp<ParamListBase>;
@@ -20,6 +22,7 @@ export const Home: React.FC<Props> = ({ navigation }) => {
                     color: theme.text
                 }}
             >This is the home screen</Text>
+            <Button title={"Navigate"} onPress={() => NavigationSession.inst.navigateTo(Account, navigation, "Penis")}/>
         </View>
     )
 }

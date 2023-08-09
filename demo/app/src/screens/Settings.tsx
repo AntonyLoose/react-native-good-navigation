@@ -11,10 +11,15 @@ export const Settings: React.FC<Props> = ({ navigation }) => {
         <View
             style={{
                 flex: 1,
-                backgroundColor: theme.background
+                backgroundColor: theme.background,
+                padding: 20
             }}
         >
-            <Text>This is the settings screen</Text>
+            <Text
+                style={{
+                    color: theme.text
+                }}
+            >This is the settings screen</Text>
         </View>
     )
 }

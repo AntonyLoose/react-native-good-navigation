@@ -1,7 +1,5 @@
 import { NavigationContainer } from '@react-navigation/native';
-import { DrawerNavigator } from './src/navigators/DrawerNavigator';
 import { GoodNavigator } from './src/navigators/GoodNavigator';
-import { TabNavigator } from './src/navigators/TabNavigator';
 import { Tab } from './src/navigators/types';
 import { Account } from './src/screens/Account';
 import { Home } from './src/screens/home/Home';

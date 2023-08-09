@@ -22,15 +22,18 @@ export type Theme = {
   tabFocused: string;
 }
 
+export type Screen = {
+  id: string,
+  component: React.FC<ScreenProps>,
+  title: string
+}
+
 /**
  * This is the object the navigators take in.
  * Use this type to set the initial tabs for navigation.
  */
 export type Tab = {
-    screen: {
-        component: React.FC<ScreenProps>,
-        title: string
-    },
+    screen: Screen;
     label?: string,
     overrideTabbarLabelStyle?: TextStyle,
     tabbarStyle?: { // allows you to have seperate styles for each tab in tabbar

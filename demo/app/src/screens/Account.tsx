@@ -15,7 +15,11 @@ export const Account: React.FC<Props> = ({ navigation }) => {
                 padding: 20
             }}
         >
-            <Text>This is the account screen</Text>
+            <Text
+                style={{
+                    color: theme.text
+                }}
+            >This is the account screen</Text>
         </View>
     )
 }

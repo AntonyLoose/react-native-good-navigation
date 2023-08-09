@@ -15,7 +15,11 @@ export const Search: React.FC<Props> = ({ navigation }) => {
                 padding: 20
             }}
         >
-            <Text>This is the search screen</Text>
+            <Text
+                style={{
+                    color: theme.text
+                }}
+            >This is the search screen</Text>
         </View>
     )
 }

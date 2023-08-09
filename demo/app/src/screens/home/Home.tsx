@@ -1,5 +1,5 @@
 import { NavigationProp, ParamListBase } from "@react-navigation/native";
-import { Button, Text, View } from "react-native"
+import { Button, Text, TouchableOpacity, View } from "react-native"
 import { NavigationSession } from "../../state/NavigationSession";
 import { theme } from "../../styles";
 import { Account } from "../Account";
@@ -22,7 +22,27 @@ export const Home: React.FC<Props> = ({ navigation }) => {
                     color: theme.text
                 }}
             >This is the home screen</Text>
-            <Button title={"Navigate"} onPress={() => NavigationSession.inst.navigateTo(Account, navigation, "Penis")}/>
+
+            <View style={{ paddingBottom: 20 }}/>
+
+            <TouchableOpacity
+                style={{
+                    height: "10%",
+                    borderRadius: 20,
+                    backgroundColor: theme.primary,
+                    justifyContent: "center",
+                    alignItems: "center"
+                }}
+                onPress={() => NavigationSession.inst.navigateTo(Account, navigation, "Account")}
+            >
+                <Text
+                    style={{
+                        color: "white",
+                        fontWeight: "bold",
+                        fontSize: 20
+                    }}
+                >Navigate</Text>
+            </TouchableOpacity>
         </View>
     )
 }

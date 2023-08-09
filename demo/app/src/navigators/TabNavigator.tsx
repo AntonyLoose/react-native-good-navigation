@@ -77,7 +77,12 @@ export const TabNavigator: React.FC<TabNavigatorProps> = ({
                     backgroundColor: headerStyle?.backgroundColor || theme?.background
                 }}
             >
-                <Stack.Navigator>
+                <Stack.Navigator
+                    screenOptions={{
+                        // We have to disable as we cannot override the method called on back
+                        gestureEnabled: false // TODO: replace this gesture
+                    }}
+                >
                     {
                         screens.map((screen, i) => {
                             return (

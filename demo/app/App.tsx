@@ -6,7 +6,7 @@ import { Account } from './src/screens/Account';
 import { Home } from './src/screens/home/Home';
 import { HomeSidebar } from './src/screens/home/HomeSidebar';
 import { Settings } from './src/screens/Settings';
-import { colours } from './src/styles';
+import { theme } from './src/styles';
 
 export default function App() {
 
@@ -52,27 +52,11 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      {/* <TabNavigator 
+      <TabNavigator 
         tabs={tabs}
-        tabbarStyle={{
-          backgroundColor: colours.background
-        }}
-        headerStyle={{
-          backgroundColor: colours.background
-        }}
-        titleStyle={{
-          color: colours.text
-        }}
-        iconColor={colours.text}
-        labelStyle={{
-          color: colours.text
-        }}
-        backIcon={{
-          icon: "chevron-left",
-          color: colours.text
-        }}
-      /> */}
-      <DrawerNavigator 
+        theme={theme}
+      />
+      {/* <DrawerNavigator 
         tabs={tabs} 
         drawerTitle={"Navigator"}
         theme={{
@@ -83,7 +67,7 @@ export default function App() {
           tabFocused: colours.card,
           border: colours.border
         }}
-      />
+      /> */}
     </NavigationContainer>
   );
 }

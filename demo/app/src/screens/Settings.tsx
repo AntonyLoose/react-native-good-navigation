@@ -1,6 +1,6 @@
 import { NavigationProp, ParamListBase } from "@react-navigation/native";
 import { Text, View } from "react-native"
-import { colours } from "../styles";
+import { theme } from "../styles";
 
 interface Props {
     navigation: NavigationProp<ParamListBase>;
@@ -11,7 +11,7 @@ export const Settings: React.FC<Props> = ({ navigation }) => {
         <View
             style={{
                 flex: 1,
-                backgroundColor: colours.background
+                backgroundColor: theme.background
             }}
         >
             <Text>This is the settings screen</Text>

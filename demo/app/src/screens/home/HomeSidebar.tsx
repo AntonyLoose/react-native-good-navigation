@@ -1,18 +1,18 @@
 import { Text, View } from "react-native"
-import { colours } from "../../styles"
+import { theme } from "../../styles"
 
 export const HomeSidebar: React.FC= () => {
     return (
         <View
             style={{
                 flex: 1,
-                backgroundColor: colours.background,
+                backgroundColor: theme.background,
                 padding: 20,
             }}
         >
             <Text
                 style={{
-                    color: colours.text
+                    color: theme.text
                 }}
             >This is the home sidebar</Text>
         </View>

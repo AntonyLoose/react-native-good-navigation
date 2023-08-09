@@ -5,10 +5,11 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { Text } from "react-native"
 import { Header } from "../components/Header";
 import { PressableIcon } from "../components/PressableIcon";
-import { IconType, Tab } from "./types"
+import { IconType, Tab, Theme } from "./types"
 
 interface Props {
     tabs: Tab[],
+    theme?: Theme,
     tabbarStyle?: ViewStyle,
     headerStyle?: TextStyle,
     titleStyle?: TextStyle,
@@ -21,11 +22,12 @@ interface Props {
 
 export const TabNavigator: React.FC<Props> = ({ 
     tabs, 
+    theme,
     headerStyle, 
     tabbarStyle,
     titleStyle,
     backIcon,
-    iconColor = "black",
+    iconColor,
     focusedIconColor,
     iconSize = 40,
     labelStyle
@@ -58,12 +60,12 @@ export const TabNavigator: React.FC<Props> = ({
                                         <Header
                                             title={tab.screen.title}
                                             isNotFirstScreen={i > 0}
-                                            style={headerStyle}
-                                            titleStyle={titleStyle}
+                                            style={headerStyle || { backgroundColor: theme?.background }}
+                                            titleStyle={titleStyle || { color: theme?.text }}
                                             backIcon={backIcon?.icon}
                                             backIconStyle={backIcon?.style}
                                             backIconSize={backIcon?.size}
-                                            backIconColor={backIcon?.color}
+                                            backIconColor={backIcon?.color || theme?.text}
                                             navigation={navigation}
                                         />
                                     )
@@ -80,18 +82,17 @@ export const TabNavigator: React.FC<Props> = ({
                         {
                             flexDirection: "row",
                             width: "100%",
-                            paddingVertical: 10
+                            paddingVertical: 10,
+                            backgroundColor: tabbarStyle?.backgroundColor || theme?.background
                         },
                         tabbarStyle
                     ]}
                 >
                     {
                         tabs.map((tab, i) => {
-
                             const focused = tab.label == activeTab.label;
-
                             return (
-                                <TabComponent key={i} onPress={onTabPress} tab={tab} color={(focused ? tab.icon?.tabbarStyle?.overrideFocusedColor : tab.icon?.tabbarStyle?.overrideColor) || iconColor} size={iconSize} focused={focused} labelStyle={labelStyle}/>
+                                <TabComponent key={i} onPress={onTabPress} tab={tab} color={(focused ? (tab.icon?.tabbarStyle?.overrideFocusedColor || focusedIconColor) : tab.icon?.tabbarStyle?.overrideColor) || iconColor || theme?.text || "#FFFFFF"} size={iconSize} focused={focused} theme={theme} labelStyle={labelStyle}/>
                             )
                         })
                     }
@@ -108,10 +109,11 @@ interface TabProps {
     size: number;
     focused: boolean;
     onPress: (tab: Tab) => void;
+    theme?: Theme;
     labelStyle?: TextStyle;
 }
 
-const TabComponent: React.FC<TabProps> = ({ tab, color, size, focused, onPress, labelStyle }) => {
+const TabComponent: React.FC<TabProps> = ({ tab, color, size, focused, onPress, theme, labelStyle }) => {
     return (
         <Pressable 
             style={[
@@ -127,7 +129,10 @@ const TabComponent: React.FC<TabProps> = ({ tab, color, size, focused, onPress, 
             <PressableIcon onPress={() => onPress(tab)} icon={(focused ? tab.icon?.focused : tab.icon?.unfocused) || ""} size={tab.icon?.tabbarStyle?.size || size} color={color} style={{ alignSelf: "center"}}/>
             <Text 
                 style={[
-                    { textAlign: "center" },
+                    { 
+                        textAlign: "center", 
+                        color: tab.overrideTabbarLabelStyle?.color || labelStyle?.color || theme?.text
+                    },
                     tab.overrideTabbarLabelStyle || labelStyle
                 ]}
             >

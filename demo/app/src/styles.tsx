@@ -5,5 +5,6 @@ export const colours = {
     accent: "#A2F490",
     background: "#404040",
     card: "#636363",
-    text: "#CCE6C6"
+    text: "#CCE6C6",
+    border: "#636363"
 }

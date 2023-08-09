@@ -75,43 +75,14 @@ export default function App() {
       <DrawerNavigator 
         tabs={tabs} 
         drawerTitle={"Navigator"}
-        drawerStyle={{
-          backgroundColor: colours.background
-        }}  
-        drawerTabFocusedStyle={{
-          style: {
-            backgroundColor: colours.card
-          }
+        theme={{
+          primary: colours.primary,
+          secondary: colours.accent,
+          background: colours.background,
+          text: colours.text,
+          tabFocused: colours.card,
+          border: colours.border
         }}
-        drawerTitleStyle={{
-          color: colours.text
-        }}
-        toggleDrawerIcon={{
-          color: colours.text
-        }}
-        labelStyle={{
-          color: colours.text
-        }} 
-        tabIconStyle={{
-          focusedColor: colours.text,
-          unFocusedColor: colours.text
-        }}
-        sidebarStyle={{
-          style: {
-            backgroundColor: colours.background,
-            borderColor: colours.card
-          },
-          titleStyle: {
-            color: colours.text
-          }
-        }}
-        screenHeaderStyle={{
-          backgroundColor: colours.background
-        }}
-        screenTitleStyle={{
-          color: colours.text
-        }}
-        borderColor={colours.card}
       />
     </NavigationContainer>
   );

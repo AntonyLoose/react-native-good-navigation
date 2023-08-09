@@ -4,7 +4,7 @@ import { DimensionValue, Platform, Pressable, SafeAreaView, Text, TextStyle, Vie
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { Header } from "../components/Header";
 import { PressableIcon } from "../components/PressableIcon";
-import { IconType, Tab } from "./types"
+import { IconType, Tab, Theme } from "./types"
 
 type DrawerTabStyle = {
     style: ViewStyle;
@@ -23,6 +23,7 @@ type TabIconStyle = {
 interface Props {
     tabs: Tab[];
     drawerTitle: string;
+    theme?: Theme;
     drawerStyle?: ViewStyle;
     borderColor?: string;
     drawerTabUnfocusedStyle?: DrawerTabStyle;
@@ -47,6 +48,7 @@ interface Props {
 export const DrawerNavigator: React.FC<Props> = ({ 
     tabs,
     drawerTitle,
+    theme,
     drawerTitleStyle,
     drawerStyle,
     borderColor,
@@ -86,8 +88,9 @@ export const DrawerNavigator: React.FC<Props> = ({
                                 width: "25%",
                                 height: "100%",
                                 borderRightWidth: 1,
-                                borderColor: borderColor || "#e8e8e8",
-                                paddingTop: 20
+                                borderColor: borderColor || theme?.border || "#e8e8e8",
+                                paddingTop: 20,
+                                backgroundColor: drawerStyle?.backgroundColor || theme?.background
                             },
                             drawerStyle
                         ]}
@@ -112,7 +115,7 @@ export const DrawerNavigator: React.FC<Props> = ({
                                     <PressableIcon
                                         icon={toggleDrawerIcon?.icon || "book-open-outline"}
                                         size={toggleDrawerIcon?.size || 30 }
-                                        color={toggleDrawerIcon?.color || "#000000"}
+                                        color={toggleDrawerIcon?.color || theme?.text || "#000000"}
                                         onPress={() => setDrawerVisible(false)}
                                     />
                                     <Text 
@@ -120,7 +123,8 @@ export const DrawerNavigator: React.FC<Props> = ({
                                             {
                                                 fontWeight: "bold",
                                                 fontSize: 25,
-                                                paddingLeft: 10
+                                                paddingLeft: 10,
+                                                color: drawerTitleStyle?.color || theme?.text
                                             },
                                             drawerTitleStyle
                                         ]}   
@@ -144,6 +148,7 @@ export const DrawerNavigator: React.FC<Props> = ({
                                                 width={focused ? drawerTabFocusedStyle?.width : drawerTabUnfocusedStyle?.width} 
                                                 padding={focused ? drawerTabFocusedStyle?.padding : drawerTabUnfocusedStyle?.padding}
                                                 labelStyle={(focused ? drawerTabFocusedStyle?.overrideLabelStyle : drawerTabUnfocusedStyle?.overrideLabelStyle) || labelStyle} 
+                                                theme={theme}
                                                 style={focused ? drawerTabFocusedStyle?.style : drawerTabUnfocusedStyle?.style}
                                             />
                                         )
@@ -161,15 +166,16 @@ export const DrawerNavigator: React.FC<Props> = ({
                     <Sidebar 
                         Screen={activeTab.sidebar.component}
                         title={activeTab.sidebar.title}
-                        titleStyle={activeTab.sidebar.titleStyle || sidebarStyle?.titleStyle}
-                        style={activeTab.sidebar.style || sidebarStyle?.style}
+                        titleStyle={activeTab.sidebar.titleStyle || sidebarStyle?.titleStyle || { color: theme?.text }}
+                        style={activeTab.sidebar.style || sidebarStyle?.style || { backgroundColor: theme?.background }}
                         drawerVisible={drawerVisible}
                         toggleDrawerIcon={{
                             icon: toggleDrawerIcon?.icon || "book-open-outline",
                             size: toggleDrawerIcon?.size || 30,
-                            color: toggleDrawerIcon?.color || "#000000",
+                            color: toggleDrawerIcon?.color || theme?.text || "#000000",
                             onPress: () => setDrawerVisible(true)
                         }}
+                        theme={theme}
                     />
                 )
             }
@@ -184,7 +190,7 @@ export const DrawerNavigator: React.FC<Props> = ({
                     (drawerVisible == true || activeTab.sidebar != undefined) ? undefined : (
                         <SafeAreaView
                             style={{
-                                backgroundColor: screenHeaderStyle?.backgroundColor
+                                backgroundColor: screenHeaderStyle?.backgroundColor || theme?.background
                             }}
                         >
                             <View
@@ -196,7 +202,7 @@ export const DrawerNavigator: React.FC<Props> = ({
                                 <PressableIcon
                                     icon={toggleDrawerIcon?.icon || "book-open-outline"}
                                     size={toggleDrawerIcon?.size || 30 }
-                                    color={toggleDrawerIcon?.color || "#000000"}
+                                    color={toggleDrawerIcon?.color || theme?.text || "#000000"}
                                     onPress={() => setDrawerVisible(true)}
                                 />
                             </View>
@@ -216,12 +222,12 @@ export const DrawerNavigator: React.FC<Props> = ({
                                             <Header
                                                 title={tab.screen.title}
                                                 isNotFirstScreen={i > 0}
-                                                style={screenHeaderStyle}
-                                                titleStyle={screenTitleStyle}
+                                                style={screenHeaderStyle || { backgroundColor: theme?.background }}
+                                                titleStyle={screenTitleStyle || { color: theme?.text }}
                                                 backIcon={backIcon?.icon || "chevron-left"}
                                                 backIconStyle={backIcon?.style}
                                                 backIconSize={backIcon?.size}
-                                                backIconColor={backIcon?.color}
+                                                backIconColor={backIcon?.color || theme?.text}
                                                 navigation={navigation}
                                             />
                                         )
@@ -245,10 +251,11 @@ interface TabProps {
     width?: DimensionValue;
     padding?: number;
     labelStyle?: TextStyle;
+    theme?: Theme;
     style?: ViewStyle;
 }
 
-const TabComponent: React.FC<TabProps> = ({ tab, onPress, focused=false, iconStyle, height, width, padding, labelStyle, style }) => {
+const TabComponent: React.FC<TabProps> = ({ tab, onPress, focused=false, iconStyle, height, width, padding, labelStyle, theme, style }) => {
     // TODO: this current styling couples padding and height which is annoying, fix
     return (
         <View
@@ -265,7 +272,7 @@ const TabComponent: React.FC<TabProps> = ({ tab, onPress, focused=false, iconSty
                         borderRadius: 10,
                         paddingHorizontal: 10
                     },
-                    focused == true ? { backgroundColor: tab.drawerStyle?.focused.backgroundColor || style?.backgroundColor || "#e8e8e8" } : {},
+                    focused == true ? { backgroundColor: tab.drawerStyle?.focused.backgroundColor || style?.backgroundColor || theme?.tabFocused || "#e8e8e8" } : {},
                     style || focused ? tab.drawerStyle?.focused : tab.drawerStyle?.unFocused
                 ]}
                 onPress={() => onPress(tab)}
@@ -280,13 +287,14 @@ const TabComponent: React.FC<TabProps> = ({ tab, onPress, focused=false, iconSty
                     <Icon 
                         name={focused ? tab.icon?.focused || "" : tab.icon?.unfocused || ""} 
                         size={tab.icon?.drawerStyle?.size || iconStyle?.size || 40} 
-                        color={focused ? tab.icon?.drawerStyle?.overrideFocusedColor || iconStyle?.focusedColor || "#000000" : tab.icon?.drawerStyle?.overrideColor || iconStyle?.unFocusedColor || "#000000"}
+                        color={focused ? tab.icon?.drawerStyle?.overrideFocusedColor || iconStyle?.focusedColor || theme?.text || "#000000" : tab.icon?.drawerStyle?.overrideColor || iconStyle?.unFocusedColor || theme?.text || "#000000"}
                     />
                     <View style={{ paddingHorizontal: 5 }}/>
                     <Text 
                         style={tab?.overrideDrawerLabelStyle || labelStyle || {
                             fontWeight: "400",
-                            fontSize: 17
+                            fontSize: 17,
+                            color: theme?.text
                         }}
                     >
                         {tab.label}
@@ -309,16 +317,17 @@ interface SidebarProps {
         onPress: () => void
     };
     titleStyle?: TextStyle;
+    theme?: Theme;
     style?: ViewStyle;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ Screen, title, drawerVisible, toggleDrawerIcon, titleStyle, style }) => {
+const Sidebar: React.FC<SidebarProps> = ({ Screen, title, drawerVisible, toggleDrawerIcon, titleStyle, theme, style }) => {
     return (
         <View
             style={[
                 {
                     borderRightWidth: style?.borderRightWidth || 1,
-                    borderColor: style?.borderColor || "#e8e8e8",
+                    borderColor: style?.borderColor || theme?.border || "#e8e8e8",
                     width: style?.width || "25%",
                     height: "100%",
                     paddingTop: style?.paddingTop || 20
@@ -354,7 +363,8 @@ const Sidebar: React.FC<SidebarProps> = ({ Screen, title, drawerVisible, toggleD
                                 {
                                     fontWeight: titleStyle?.fontWeight || "bold",
                                     fontSize: titleStyle?.fontSize || 25,
-                                    paddingLeft: !drawerVisible ? 20 : 0
+                                    paddingLeft: !drawerVisible ? 20 : 0,
+                                    color: titleStyle?.color || theme?.text
                                 },
                                 titleStyle
                             ]}

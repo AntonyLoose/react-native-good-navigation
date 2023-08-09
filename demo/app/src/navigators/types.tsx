@@ -13,6 +13,15 @@ export type IconType = {
     style?: ViewStyle
 }
 
+export type Theme = {
+  primary: string;
+  secondary: string;
+  background: string;
+  text: string;
+  border: string;
+  tabFocused: string;
+}
+
 /**
  * This is the object the navigators take in.
  * Use this type to set the initial tabs for navigation.

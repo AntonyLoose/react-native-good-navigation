@@ -1,5 +1,6 @@
 import { NavigationProp, ParamListBase } from "@react-navigation/native";
 import { Text, View } from "react-native"
+import { colours } from "../styles";
 
 interface Props {
     navigation: NavigationProp<ParamListBase>;
@@ -10,7 +11,7 @@ export const Search: React.FC<Props> = ({ navigation }) => {
         <View
             style={{
                 flex: 1,
-                backgroundColor: "white",
+                backgroundColor: colours.background,
                 padding: 20
             }}
         >

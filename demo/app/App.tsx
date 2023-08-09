@@ -56,7 +56,8 @@ export default function App() {
     <NavigationContainer>
       <GoodNavigator
         tabbarProps={{
-          tabs: tabs
+          tabs: tabs,
+          landingTab: tabs[1]
         }}
         drawerProps={{
           tabs: tabs,

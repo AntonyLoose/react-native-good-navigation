@@ -12,6 +12,7 @@ import { NavigationSession } from "../state/NavigationSession";
 
 export interface TabNavigatorProps {
     tabs: Tab[],
+    landingTab?: Tab,
     theme?: Theme,
     tabbarStyle?: ViewStyle,
     headerStyle?: TextStyle,
@@ -25,6 +26,7 @@ export interface TabNavigatorProps {
 
 export const TabNavigator: React.FC<TabNavigatorProps> = ({ 
     tabs, 
+    landingTab,
     theme,
     headerStyle, 
     tabbarStyle,
@@ -36,13 +38,17 @@ export const TabNavigator: React.FC<TabNavigatorProps> = ({
     labelStyle
 }) => {
 
-    const [activeTab, setActiveTab] = useState<Tab>(tabs[0]);
+    const [activeTab, setActiveTab] = useState<Tab>(landingTab || tabs[0]);
     const [screens, setScreens] = useState<Screen[]>([activeTab.screen]);
 
     useEffect(() => {
         NavigationSession.inst.addScreen(activeTab.screen);
         NavigationStateManager.screenStackUpdated.subscribe(() => {
             setScreens([...NavigationSession.inst.screens]);
+        })
+
+        NavigationStateManager.activeTabUpdated.subscribe(() => {
+            setActiveTab(NavigationSession.inst.activeTab || tabs[0]);
         })
     }, [])
     
@@ -55,6 +61,7 @@ export const TabNavigator: React.FC<TabNavigatorProps> = ({
     
     const onTabPress = (tab: Tab) => {
         NavigationSession.inst.clearScreens(tab.screen);
+        NavigationSession.inst.activeTab = tab;
         setActiveTab(tab);
     }
 

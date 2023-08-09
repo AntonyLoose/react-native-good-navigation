@@ -1,6 +1,6 @@
 import { NavigationProp, ParamListBase } from "@react-navigation/native";
 import React from "react";
-import { Screen, ScreenProps } from "../navigators/types";
+import { Screen, ScreenProps, Tab } from "../navigators/types";
 import { NavigationStateManager } from "./NavigationStateManager";
 
 class NavigationSession {
@@ -10,6 +10,15 @@ class NavigationSession {
     private _screens: Screen[] = [];
     public get screens(){
         return this._screens;
+    }
+
+    private _activeTab?: Tab;
+    public get activeTab(): Tab | undefined {
+        return this._activeTab
+    }
+    public set activeTab(tab: Tab | undefined){
+        this._activeTab = tab;
+        NavigationStateManager.activeTabUpdated.publish();
     }
 
     /**

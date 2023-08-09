@@ -34,6 +34,7 @@ export const GoodNavigator: React.FC<Props> = ({ theme, drawerProps, tabbarProps
         return <TabNavigator
             tabs={tabbarProps.tabs}
             theme={tabbarProps.theme || theme}
+            landingTab={tabbarProps.landingTab}
         />
     }
 }

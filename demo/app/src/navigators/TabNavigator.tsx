@@ -2,6 +2,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { useEffect, useState } from "react";
 import { Platform, Pressable, TextStyle, View, ViewStyle } from "react-native"
 import { SafeAreaView } from "react-native-safe-area-context";
+import { SafeAreaView as TopSafeAreaView } from "react-native";
 import { Text } from "react-native"
 import { Header } from "../components/Header";
 import { PressableIcon } from "../components/PressableIcon";
@@ -63,35 +64,42 @@ export const TabNavigator: React.FC<TabNavigatorProps> = ({
                 flex: 1
             }}
         >
-            <Stack.Navigator>
-                {
-                    screens.map((screen, i) => {
-                        return (
-                            <Stack.Screen
-                                key={screen.id}
-                                name={screen.title}
-                                component={screen.component}
-                                options={({ navigation }) => ({
-                                    animationEnabled: i > 0 && !(Platform.OS == "web"),
-                                    header: () => (
-                                        <Header
-                                            title={screen.title}
-                                            isNotFirstScreen={i > 0}
-                                            style={headerStyle || { backgroundColor: theme?.background }}
-                                            titleStyle={titleStyle || { color: theme?.text }}
-                                            backIcon={backIcon?.icon}
-                                            backIconStyle={backIcon?.style}
-                                            backIconSize={backIcon?.size}
-                                            backIconColor={backIcon?.color || theme?.text}
-                                            navigation={navigation}
-                                        />
-                                    )
-                                })}
-                            />
-                        )
-                    })
-                }
-            </Stack.Navigator>
+            <TopSafeAreaView
+                style={{
+                    flex: 1,
+                    backgroundColor: headerStyle?.backgroundColor || theme?.background
+                }}
+            >
+                <Stack.Navigator>
+                    {
+                        screens.map((screen, i) => {
+                            return (
+                                <Stack.Screen
+                                    key={screen.id}
+                                    name={screen.id}
+                                    component={screen.component}
+                                    options={({ navigation }) => ({
+                                        animationEnabled: i > 0 && !(Platform.OS == "web"),
+                                        header: () => (
+                                            <Header
+                                                title={screen.title}
+                                                isNotFirstScreen={i > 0}
+                                                style={headerStyle || { backgroundColor: theme?.background }}
+                                                titleStyle={titleStyle || { color: theme?.text }}
+                                                backIcon={backIcon?.icon}
+                                                backIconStyle={backIcon?.style}
+                                                backIconSize={backIcon?.size}
+                                                backIconColor={backIcon?.color || theme?.text}
+                                                navigation={navigation}
+                                            />
+                                        )
+                                    })}
+                                />
+                            )
+                        })
+                    }
+                </Stack.Navigator>
+            </TopSafeAreaView>
 
             <SafeAreaView edges={["bottom"]}>
                 <View

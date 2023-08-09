@@ -13,6 +13,7 @@ export default function App() {
     {
       label: "Home",
       screen: {
+        id: "HOME",
         component: Home,
         title: "Home"
       },
@@ -28,6 +29,7 @@ export default function App() {
     {
       label: "Account",
       screen: {
+        id: "ACCOUNT",
         component: Account,
         title: "Account"
       },
@@ -39,6 +41,7 @@ export default function App() {
     {
       label: "Settings",
       screen: {
+        id: "SETTINGS",
         component: Settings,
         title: "Settings"
       },

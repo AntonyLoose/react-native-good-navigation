@@ -29,34 +29,32 @@ export const Header: React.FC<Props> = ({
     backIconSize
 }) => {
     return (
-        <SafeAreaView style={{ backgroundColor: style?.backgroundColor || "#FFFFFF" }}>
-            <View
+        <View
+            style={[
+                {
+                    alignItems: "center",
+                    flexDirection: "row",
+                    paddingHorizontal: isNotFirstScreen ? 5 : 20,
+                    backgroundColor: style?.backgroundColor || "#FFFFFF",
+                    paddingTop: Platform.OS == "web" ? 10 : 0
+                },
+                style
+            ]}
+        >   
+            {
+                isNotFirstScreen ? <PressableIcon onPress={() => NavigationSession.inst.navigateBack(navigation)} icon={backIcon || "chevron-left"} size={backIconSize || 60} color={backIconColor || "black"} style={backIconStyle}/> : null
+            }
+            <Text
                 style={[
                     {
-                        alignItems: "center",
-                        flexDirection: "row",
-                        paddingHorizontal: isNotFirstScreen ? 5 : 20,
-                        backgroundColor: style?.backgroundColor || "#FFFFFF",
-                        paddingTop: Platform.OS == "web" ? 10 : 0
+                        fontWeight: titleStyle?.fontWeight || "bold",
+                        fontSize: titleStyle?.fontSize || 55,
                     },
-                    style
+                    titleStyle
                 ]}
-            >   
-                {
-                    isNotFirstScreen ? <PressableIcon onPress={() => NavigationSession.inst.navigateBack(navigation)} icon={backIcon || "chevron-left"} size={backIconSize || 60} color={backIconColor || "black"} style={backIconStyle}/> : null
-                }
-                <Text
-                    style={[
-                        {
-                            fontWeight: titleStyle?.fontWeight || "bold",
-                            fontSize: titleStyle?.fontSize || 55,
-                        },
-                        titleStyle
-                    ]}
-                >
-                    {title}
-                </Text>
-            </View>
-        </SafeAreaView>
+            >
+                {title}
+            </Text>
+        </View>
     )
 }

@@ -7,7 +7,7 @@ import { Header } from "../components/Header";
 import { PressableIcon } from "../components/PressableIcon";
 import { IconType, Tab, Theme } from "./types"
 
-interface Props {
+export interface TabNavigatorProps {
     tabs: Tab[],
     theme?: Theme,
     tabbarStyle?: ViewStyle,
@@ -20,7 +20,7 @@ interface Props {
     labelStyle?: TextStyle;
 }
 
-export const TabNavigator: React.FC<Props> = ({ 
+export const TabNavigator: React.FC<TabNavigatorProps> = ({ 
     tabs, 
     theme,
     headerStyle, 

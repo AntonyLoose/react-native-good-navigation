@@ -1,5 +1,6 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { DrawerNavigator } from './src/navigators/DrawerNavigator';
+import { GoodNavigator } from './src/navigators/GoodNavigator';
 import { TabNavigator } from './src/navigators/TabNavigator';
 import { Tab } from './src/navigators/types';
 import { Account } from './src/screens/Account';
@@ -52,22 +53,16 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <TabNavigator 
-        tabs={tabs}
+      <GoodNavigator
+        tabbarProps={{
+          tabs: tabs
+        }}
+        drawerProps={{
+          tabs: tabs,
+          drawerTitle: "Navigator"
+        }}
         theme={theme}
       />
-      {/* <DrawerNavigator 
-        tabs={tabs} 
-        drawerTitle={"Navigator"}
-        theme={{
-          primary: colours.primary,
-          secondary: colours.accent,
-          background: colours.background,
-          text: colours.text,
-          tabFocused: colours.card,
-          border: colours.border
-        }}
-      /> */}
     </NavigationContainer>
   );
 }

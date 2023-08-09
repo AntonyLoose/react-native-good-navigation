@@ -20,7 +20,7 @@ type TabIconStyle = {
     size?: string;
 }
 
-interface Props {
+export interface DrawerNavigatorProps {
     tabs: Tab[];
     drawerTitle: string;
     theme?: Theme;
@@ -45,7 +45,7 @@ interface Props {
     tabIconStyle?: TabIconStyle;
 }
 
-export const DrawerNavigator: React.FC<Props> = ({ 
+export const DrawerNavigator: React.FC<DrawerNavigatorProps> = ({ 
     tabs,
     drawerTitle,
     theme,

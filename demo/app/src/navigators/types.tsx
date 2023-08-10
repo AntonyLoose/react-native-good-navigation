@@ -62,7 +62,7 @@ export type Tab = {
     sidebar?: {
       title: string,
       titleStyle?: TextStyle,
-      component: React.FC,
+      component: React.FC<any>,
       style?: ViewStyle;
     }
 }

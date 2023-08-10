@@ -25,25 +25,6 @@ export const Home: React.FC<Props> = ({ navigation }) => {
             >This is the home screen</Text>
 
             <View style={{ paddingBottom: 20 }}/>
-
-            <TouchableOpacity
-                style={{
-                    height: "10%",
-                    borderRadius: 20,
-                    backgroundColor: theme.primary,
-                    justifyContent: "center",
-                    alignItems: "center"
-                }}
-                onPress={() => NavigationSession.inst.navigateTo(Settings, navigation, "Settings")}
-            >
-                <Text
-                    style={{
-                        color: "white",
-                        fontWeight: "bold",
-                        fontSize: 20
-                    }}
-                >Navigate</Text>
-            </TouchableOpacity>
         </View>
     )
 }

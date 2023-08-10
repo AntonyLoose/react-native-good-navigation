@@ -12,11 +12,11 @@ export default function App() {
 
   const tabs: Tab[] = [
     {
-      label: "Home",
+      label: "Homes",
       screen: {
-        id: "HOME",
-        component: Home,
-        title: "Home"
+        id: "HOMES",
+        component: HomeSidebar,
+        title: "Homes"
       },
       icon: {
         focused: "home",
@@ -59,7 +59,7 @@ export default function App() {
       <GoodNavigator
         tabbarProps={{
           tabs: tabs,
-          landingTab: tabs[1]
+          landingTab: tabs[0]
         }}
         drawerProps={{
           tabs: tabs,

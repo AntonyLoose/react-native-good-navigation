@@ -20,9 +20,9 @@ export type Theme = {
 }
 
 export type Screen = {
-  id: string,
-  component: React.FC<ScreenProps>,
-  title: string
+  id: string;
+  component: React.FC<ScreenProps>;
+  title: string;
 }
 
 /**

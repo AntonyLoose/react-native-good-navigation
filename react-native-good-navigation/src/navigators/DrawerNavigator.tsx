@@ -413,12 +413,6 @@ const Sidebar: React.FC<SidebarProps> = ({ Screen, title, drawerVisible, toggleD
                 style
             ]}
         >
-
-            <SafeAreaView
-                style={{
-                    flex: 1
-                }}
-            >
                 <View
                     style={{
                         flexDirection: "row",
@@ -451,7 +445,6 @@ const Sidebar: React.FC<SidebarProps> = ({ Screen, title, drawerVisible, toggleD
                     </Text>
                 </View>
                 <Screen/>
-            </SafeAreaView>
         </View>
 
     )

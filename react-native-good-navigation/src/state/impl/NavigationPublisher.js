@@ -1,19 +1,19 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var toolkit_1 = require("@reduxjs/toolkit");
+const toolkit_1 = require("@reduxjs/toolkit");
 /**
  * A redux wrapper for managing application-wide state using the publisher-subscriber pattern.
  * To only be initialised within StateManager.
  */
-var NavigationPublisher = /** @class */ (function () {
-    function NavigationPublisher() {
+class NavigationPublisher {
+    constructor() {
         this.slice = (0, toolkit_1.createSlice)({
             name: "NavigationPublisher",
             initialState: {
                 value: 0,
             },
             reducers: {
-                newForm: function (state) {
+                newForm: (state) => {
                     state.value = (state.value + 1) % 10;
                 },
             },
@@ -22,12 +22,11 @@ var NavigationPublisher = /** @class */ (function () {
             reducer: this.slice.reducer,
         });
     }
-    NavigationPublisher.prototype.subscribe = function (callback) {
+    subscribe(callback) {
         this.publisher.subscribe(callback);
-    };
-    NavigationPublisher.prototype.publish = function () {
+    }
+    publish() {
         this.publisher.dispatch(this.slice.actions.newForm());
-    };
-    return NavigationPublisher;
-}());
+    }
+}
 exports.default = NavigationPublisher;

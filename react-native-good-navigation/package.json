@@ -17,6 +17,10 @@
     "url": "https://github.com/AntonyLoose/react-native-good-navigation/issues"
   },
   "homepage": "https://github.com/AntonyLoose/react-native-good-navigation#readme",
+  "dependencies": {
+    "@react-navigation/native": "^6.1.7",
+    "@react-navigation/stack": "^6.0.0"
+  },
   "peerDependencies": {
     "@react-navigation/native": "^6.1.7",
     "@react-navigation/stack": "^6.0.0",

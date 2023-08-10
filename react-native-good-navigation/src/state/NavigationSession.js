@@ -1,60 +1,51 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.NavigationSession = void 0;
-var NavigationStateManager_1 = require("./NavigationStateManager");
-var NavigationSession = /** @class */ (function () {
-    function NavigationSession() {
+const NavigationStateManager_1 = require("./NavigationStateManager");
+class NavigationSession {
+    constructor() {
         this._screens = [];
         /**
          * This method is called when the stack has been rerendered after a screen has been addded. It is used to navigate to the new screen as soon as
          * it is loaded
          */
-        this.navigateOnLoad = function () { };
+        this.navigateOnLoad = () => { };
     }
-    Object.defineProperty(NavigationSession.prototype, "screens", {
-        get: function () {
-            return this._screens;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(NavigationSession.prototype, "activeTab", {
-        get: function () {
-            return this._activeTab;
-        },
-        set: function (tab) {
-            this._activeTab = tab;
-            NavigationStateManager_1.NavigationStateManager.activeTabUpdated.publish();
-        },
-        enumerable: false,
-        configurable: true
-    });
+    get screens() {
+        return this._screens;
+    }
+    get activeTab() {
+        return this._activeTab;
+    }
+    set activeTab(tab) {
+        this._activeTab = tab;
+        NavigationStateManager_1.NavigationStateManager.activeTabUpdated.publish();
+    }
     /**
      * Clears the screens and sets the first screen (optional)
      * @param setFirstScreen the only screen that will be rendered in the stack
      */
-    NavigationSession.prototype.clearScreens = function (setFirstScreen) {
+    clearScreens(setFirstScreen) {
         this._screens = [];
         setFirstScreen != undefined ? this.screens.push(setFirstScreen) : null;
         NavigationStateManager_1.NavigationStateManager.screenStackUpdated.publish();
-    };
+    }
     /**
      * This method does not perform any navigation, it simply adds a screen to the stack.
      * Used for setting the tab bar
      * @param screen
      */
-    NavigationSession.prototype.addScreen = function (screen) {
+    addScreen(screen) {
         this._screens.push(screen);
         NavigationStateManager_1.NavigationStateManager.screenStackUpdated.publish();
-    };
+    }
     /**
      * Adds a screen to the stack and navigates to it
      * @param screen the screen to navigate to
      * @param navigation the navigation prop
      * @param title the title of the screen, this sets the title in the header component of our navigation
      */
-    NavigationSession.prototype.navigateTo = function (screen, navigation, title) {
-        var _this = this;
+    navigateTo(screen, navigation, title) {
         if (navigation == undefined) {
             this._screens = [];
         }
@@ -63,14 +54,14 @@ var NavigationSession = /** @class */ (function () {
             component: screen,
             title: title
         });
-        this.navigateOnLoad = function () {
-            if (_this._screens.length > 1 && navigation != undefined) {
+        this.navigateOnLoad = () => {
+            if (this._screens.length > 1 && navigation != undefined) {
                 navigation.navigate(title);
             }
         };
         NavigationStateManager_1.NavigationStateManager.screenStackUpdated.publish();
-    };
-    NavigationSession.prototype.navigateBack = function (navigation) {
+    }
+    navigateBack(navigation) {
         if (navigation == undefined || !navigation.canGoBack()) {
             this._screens = [];
         }
@@ -79,8 +70,7 @@ var NavigationSession = /** @class */ (function () {
             navigation.goBack();
         }
         NavigationStateManager_1.NavigationStateManager.screenStackUpdated.publish();
-    };
-    NavigationSession.inst = new NavigationSession();
-    return NavigationSession;
-}());
+    }
+}
 exports.NavigationSession = NavigationSession;
+NavigationSession.inst = new NavigationSession();

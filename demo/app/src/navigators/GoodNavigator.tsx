@@ -29,6 +29,8 @@ export const GoodNavigator: React.FC<Props> = ({ theme, drawerProps, tabbarProps
             tabs={tabbarProps.tabs}
             theme={tabbarProps.theme || theme}
             landingTab={tabbarProps.landingTab}
+            iconColor={tabbarProps.iconColor}
+            labelStyle={tabbarProps.labelStyle}
         />
     }
 }

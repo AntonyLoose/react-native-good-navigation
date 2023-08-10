@@ -1,6 +1,6 @@
 import { NavigationProp, ParamListBase } from "@react-navigation/native"
 import React from "react"
-import { TextStyle, ViewStyle } from "react-native";
+import { Dimensions, TextStyle, ViewStyle } from "react-native";
 
 export interface ScreenProps {
     navigation: NavigationProp<ParamListBase>;
@@ -10,7 +10,19 @@ export type IconType = {
     icon: string,
     color?: string,
     size?: number,
-    style?: ViewStyle
+}
+
+export type Theme = {
+  background: string;
+  text: string;
+  border: string;
+  tabFocused: string;
+}
+
+export type Screen = {
+  id: string,
+  component: React.FC<ScreenProps>,
+  title: string
 }
 
 /**
@@ -18,10 +30,7 @@ export type IconType = {
  * Use this type to set the initial tabs for navigation.
  */
 export type Tab = {
-    screen: {
-        component: React.FC<ScreenProps>,
-        title: string
-    },
+    screen: Screen;
     label?: string,
     overrideTabbarLabelStyle?: TextStyle,
     tabbarStyle?: { // allows you to have seperate styles for each tab in tabbar
@@ -50,7 +59,13 @@ export type Tab = {
     sidebar?: {
       title: string,
       titleStyle?: TextStyle,
-      component: React.FC,
+      component: React.FC<any>,
       style?: ViewStyle;
     }
+}
+
+export const getScreenType = (): "wide" | "narrow" => {
+  const { width } = Dimensions.get("window");
+
+  return width > 750 ? "wide" : "narrow";
 }

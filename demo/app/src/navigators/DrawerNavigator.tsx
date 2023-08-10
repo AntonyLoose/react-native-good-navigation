@@ -232,7 +232,7 @@ export const DrawerNavigator: React.FC<DrawerProps> = ({
                             <View
                                 style={{
                                     paddingHorizontal: 20,
-                                    paddingTop: Platform.OS == "web" ? 20 : 0
+                                    paddingTop: 20
                                 }}
                             >    
                                 <PressableIcon

@@ -113,7 +113,12 @@ export const TabNavigator: React.FC<TabNavigatorProps> = ({
                 </Stack.Navigator>
             </TopSafeAreaView>
 
-            <SafeAreaView edges={["bottom"]}>
+            <SafeAreaView 
+                edges={["bottom"]}
+                style={{
+                    backgroundColor: tabbarStyle?.backgroundColor || theme?.background
+                }}
+            >
                 <View
                     style={[
                         {

@@ -2,7 +2,7 @@ import React from "react";
 import { Dimensions } from "react-native";
 import { DrawerNavigator, DrawerProps } from "./DrawerNavigator";
 import { TabNavigator, TabNavigatorProps } from "./TabNavigator";
-import { Tab, Theme } from "./types";
+import { getScreenType, Tab, Theme } from "./types";
 
 interface Props {
     theme?: Theme;
@@ -17,14 +17,7 @@ interface Props {
  */
 export const GoodNavigator: React.FC<Props> = ({ theme, drawerProps, tabbarProps }) => {
 
-    const isLargeScreen = () => {  
-
-        const { width } = Dimensions.get("window");
-
-        return width > 750;
-    }
-
-    if (isLargeScreen()){
+    if (getScreenType() == "wide"){
         return <DrawerNavigator 
             tabs={drawerProps.tabs}
             drawerTitle={drawerProps.drawerTitle}

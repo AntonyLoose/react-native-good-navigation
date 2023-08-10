@@ -1,6 +1,7 @@
 import { NavigationProp, ParamListBase } from "@react-navigation/native";
 import React, { useEffect } from "react"
 import { Platform, SafeAreaView, Text, TextStyle, View, ViewStyle } from "react-native"
+import { getScreenType } from "../navigators/types";
 import { NavigationSession } from "../state/NavigationSession";
 import { PressableIcon } from "./PressableIcon";
 
@@ -36,7 +37,7 @@ export const Header: React.FC<Props> = ({
                     flexDirection: "row",
                     paddingHorizontal: isNotFirstScreen ? 5 : 20,
                     backgroundColor: style?.backgroundColor || "#FFFFFF",
-                    paddingTop: Platform.OS == "web" ? 10 : 0
+                    paddingTop: getScreenType() == "wide" ? (Platform.OS == "web" ? 10 : 20) : 0
                 },
                 style
             ]}

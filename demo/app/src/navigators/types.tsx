@@ -1,6 +1,6 @@
 import { NavigationProp, ParamListBase } from "@react-navigation/native"
 import React from "react"
-import { TextStyle, ViewStyle } from "react-native";
+import { Dimensions, TextStyle, ViewStyle } from "react-native";
 
 export interface ScreenProps {
     navigation: NavigationProp<ParamListBase>;
@@ -65,4 +65,10 @@ export type Tab = {
       component: React.FC,
       style?: ViewStyle;
     }
+}
+
+export const getScreenType = (): "wide" | "narrow" => {
+  const { width } = Dimensions.get("window");
+
+  return width > 750 ? "wide" : "narrow";
 }

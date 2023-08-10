@@ -55,7 +55,7 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <StatusBar/>
+      <StatusBar hidden={true}/>
       <GoodNavigator
         tabbarProps={{
           tabs: tabs,

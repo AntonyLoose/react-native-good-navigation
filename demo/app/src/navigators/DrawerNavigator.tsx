@@ -125,7 +125,7 @@ export const DrawerNavigator: React.FC<DrawerProps> = ({
                                 height: "100%",
                                 borderRightWidth: 1,
                                 borderColor: borderColor || theme?.border || "#e8e8e8",
-                                paddingTop: 20,
+                                paddingTop: drawerStyle?.padding || 20,
                                 backgroundColor: drawerStyle?.backgroundColor || theme?.background
                             },
                             drawerStyle

@@ -1,5 +1,5 @@
-import { NavigationProp, ParamListBase } from "@react-navigation/native";
 import React from "react";
+import { NavigationProp, ParamListBase } from "@react-navigation/native";
 import { Screen, ScreenProps, Tab } from "../navigators/types";
 import { NavigationStateManager } from "./NavigationStateManager";
 

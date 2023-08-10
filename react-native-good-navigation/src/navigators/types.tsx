@@ -1,5 +1,5 @@
-import { NavigationProp, ParamListBase } from "@react-navigation/native"
 import React from "react"
+import { NavigationProp, ParamListBase } from "@react-navigation/native"
 import { Dimensions, TextStyle, ViewStyle } from "react-native";
 
 export interface ScreenProps {

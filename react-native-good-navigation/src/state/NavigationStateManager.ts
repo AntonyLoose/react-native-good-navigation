@@ -5,4 +5,4 @@ class NavigationStateManager {
     public static readonly activeTabUpdated = new NavigationPublisher();
 }
 
-export { NavigationStateManager };
+export { NavigationStateManager }

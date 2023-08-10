@@ -1,3 +1,4 @@
+import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { useEffect, useState } from "react";
 import { Platform, Pressable, TextStyle, View, ViewStyle } from "react-native"

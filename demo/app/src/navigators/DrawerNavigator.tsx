@@ -19,7 +19,7 @@ type DrawerTabStyle = {
 type TabIconStyle = {
     focusedColor?: string;
     unFocusedColor?: string;
-    size?: string;
+    size?: number;
 }
 
 export interface DrawerProps {
@@ -265,7 +265,6 @@ export const DrawerNavigator: React.FC<DrawerProps> = ({
                                                         style={screenHeaderStyle || { backgroundColor: theme?.background }}
                                                         titleStyle={screenTitleStyle || { color: theme?.text }}
                                                         backIcon={backIcon?.icon || "chevron-left"}
-                                                        backIconStyle={backIcon?.style}
                                                         backIconSize={backIcon?.size}
                                                         backIconColor={backIcon?.color || theme?.text}
                                                         navigation={navigation}
@@ -364,7 +363,7 @@ const TabComponent: React.FC<TabProps> = ({ tab, onPress, focused=false, iconSty
                 >
                     <Icon 
                         name={focused ? tab.icon?.focused || "" : tab.icon?.unfocused || ""} 
-                        size={tab.icon?.drawerStyle?.size || iconStyle?.size || 40} 
+                        size={tab.icon?.drawerStyle?.size || iconStyle?.size || 40}
                         color={focused ? tab.icon?.drawerStyle?.overrideFocusedColor || iconStyle?.focusedColor || theme?.text || "#000000" : tab.icon?.drawerStyle?.overrideColor || iconStyle?.unFocusedColor || theme?.text || "#000000"}
                     />
                     <View style={{ paddingHorizontal: 5 }}/>

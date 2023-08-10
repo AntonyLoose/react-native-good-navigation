@@ -1,6 +1,6 @@
 import { NavigationProp, ParamListBase } from "@react-navigation/native";
-import React, { useEffect } from "react"
-import { Platform, SafeAreaView, Text, TextStyle, View, ViewStyle } from "react-native"
+import React from "react"
+import { Platform, Text, TextStyle, View, ViewStyle } from "react-native"
 import { getScreenType } from "../navigators/types";
 import { NavigationSession } from "../state/NavigationSession";
 import { PressableIcon } from "./PressableIcon";
@@ -13,7 +13,6 @@ interface Props {
     titleStyle?: TextStyle;
     style?: ViewStyle;
     backIcon?: string;
-    backIconStyle?: ViewStyle;
     backIconColor?: string;
     backIconSize?: number;
 }
@@ -25,7 +24,6 @@ export const Header: React.FC<Props> = ({
     titleStyle,
     style,
     backIcon,
-    backIconStyle,
     backIconColor,
     backIconSize
 }) => {
@@ -43,7 +41,7 @@ export const Header: React.FC<Props> = ({
             ]}
         >   
             {
-                isNotFirstScreen ? <PressableIcon onPress={() => NavigationSession.inst.navigateBack(navigation)} icon={backIcon || "chevron-left"} size={backIconSize || 60} color={backIconColor || "black"} style={backIconStyle}/> : null
+                isNotFirstScreen ? <PressableIcon onPress={() => NavigationSession.inst.navigateBack(navigation)} icon={backIcon || "chevron-left"} size={backIconSize || 60} color={backIconColor || "black"}/> : null
             }
             <Text
                 style={[

@@ -1,5 +1,4 @@
 import React from "react";
-import { Dimensions } from "react-native";
 import { DrawerNavigator, DrawerProps } from "./DrawerNavigator";
 import { TabNavigator, TabNavigatorProps } from "./TabNavigator";
 import { getScreenType, Tab, Theme } from "./types";

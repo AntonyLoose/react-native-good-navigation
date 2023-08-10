@@ -99,7 +99,6 @@ export const TabNavigator: React.FC<TabNavigatorProps> = ({
                                                 style={headerStyle || { backgroundColor: theme?.background }}
                                                 titleStyle={titleStyle || { color: theme?.text }}
                                                 backIcon={backIcon?.icon}
-                                                backIconStyle={backIcon?.style}
                                                 backIconSize={backIcon?.size}
                                                 backIconColor={backIcon?.color || theme?.text}
                                                 navigation={navigation}
@@ -157,13 +156,14 @@ const TabComponent: React.FC<TabProps> = ({ tab, color, size, focused, onPress, 
                 { 
                     flex: 1, 
                     justifyContent: "center",
+                    alignItems: "center",
                     paddingBottom: 20 
                 },
                 focused ? tab.tabbarStyle?.focused : tab.tabbarStyle?.unFocused
             ]}
             onPress={() => onPress(tab)}
         >
-            <PressableIcon onPress={() => onPress(tab)} icon={(focused ? tab.icon?.focused : tab.icon?.unfocused) || ""} size={tab.icon?.tabbarStyle?.size || size} color={color} style={{ alignSelf: "center"}}/>
+            <PressableIcon onPress={() => onPress(tab)} icon={(focused ? tab.icon?.focused : tab.icon?.unfocused) || ""} size={tab.icon?.tabbarStyle?.size || size} color={color}/>
             <Text 
                 style={[
                     { 

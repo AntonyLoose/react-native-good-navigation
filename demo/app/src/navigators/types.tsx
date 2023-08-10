@@ -10,7 +10,6 @@ export type IconType = {
     icon: string,
     color?: string,
     size?: number,
-    style?: ViewStyle
 }
 
 export type Theme = {

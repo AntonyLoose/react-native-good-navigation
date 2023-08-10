@@ -6,3 +6,12 @@ export const theme = {
     text: "#CCE6C6",
     border: "#636363"
 }
+
+// export const theme = {
+//     primary: "red",
+//     secondary: "blue",
+//     background: "white",
+//     tabFocused: "white",
+//     text: "black",
+//     border: "#e8e8e8"
+// }

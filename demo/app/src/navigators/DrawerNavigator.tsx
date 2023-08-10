@@ -1,10 +1,12 @@
 import { createStackNavigator } from "@react-navigation/stack";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { DimensionValue, Platform, Pressable, SafeAreaView, Text, TextStyle, View, ViewStyle } from "react-native"
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { Header } from "../components/Header";
 import { PressableIcon } from "../components/PressableIcon";
-import { IconType, Tab, Theme } from "./types"
+import { NavigationSession } from "../state/NavigationSession";
+import { NavigationStateManager } from "../state/NavigationStateManager";
+import { IconType, Screen, Tab, Theme } from "./types"
 
 type DrawerTabStyle = {
     style: ViewStyle;
@@ -20,9 +22,10 @@ type TabIconStyle = {
     size?: string;
 }
 
-export interface DrawerNavigatorProps {
+export interface DrawerProps {
     tabs: Tab[];
     drawerTitle: string;
+    landingTab?: Tab;
     theme?: Theme;
     drawerStyle?: ViewStyle;
     borderColor?: string;
@@ -43,11 +46,17 @@ export interface DrawerNavigatorProps {
     screenTitleStyle?: TextStyle,
     backIcon?: IconType;
     tabIconStyle?: TabIconStyle;
+    emptyScreen?: {
+        style?: ViewStyle;
+        textStyle?: TextStyle;
+        component?: React.FC;
+    }
 }
 
-export const DrawerNavigator: React.FC<DrawerNavigatorProps> = ({ 
+export const DrawerNavigator: React.FC<DrawerProps> = ({ 
     tabs,
     drawerTitle,
+    landingTab,
     theme,
     drawerTitleStyle,
     drawerStyle,
@@ -60,15 +69,42 @@ export const DrawerNavigator: React.FC<DrawerNavigatorProps> = ({
     screenHeaderStyle,
     screenTitleStyle,
     backIcon,
-    tabIconStyle
+    tabIconStyle,
+    emptyScreen
  }) => {
-
-    const [activeTab, setActiveTab] = useState<Tab>(tabs[0]);
+    const [activeTab, setActiveTab] = useState<Tab>(landingTab || tabs[0]);
     const [drawerVisible, setDrawerVisible] = useState<boolean>(true);
+    const [screens, setScreens] = useState<Screen[]>(activeTab.sidebar == undefined ? [activeTab.screen] : []);
+
+    useEffect(() => {
+        // we only want to add show the first screen if there is no sidebar
+        if (activeTab.sidebar == undefined){
+            NavigationSession.inst.addScreen(activeTab.screen);
+        }
+        NavigationStateManager.screenStackUpdated.subscribe(() => {
+            setScreens([...NavigationSession.inst.screens]);
+        })
+
+        NavigationStateManager.activeTabUpdated.subscribe(() => {
+            setActiveTab(NavigationSession.inst.activeTab || tabs[0]);
+        })
+    }, [])
+    
+    useEffect(() => {
+        NavigationSession.inst.navigateOnLoad();
+        NavigationSession.inst.navigateOnLoad = () => {};
+    }, [screens])
+
 
     const Stack = createStackNavigator();
 
     const onTabPress = (tab: Tab) => {
+        NavigationSession.inst.activeTab = tab;
+        if (tab.sidebar != undefined){
+            NavigationSession.inst.clearScreens();
+        }else{
+            NavigationSession.inst.clearScreens(tab.screen);
+        }
         setActiveTab(tab);
     }
 
@@ -209,35 +245,77 @@ export const DrawerNavigator: React.FC<DrawerNavigatorProps> = ({
                         </SafeAreaView>
                     )
                 }
-                <Stack.Navigator>
-                    {
-                        tabs.map((tab, i) => {
-                            return (
-                                <Stack.Screen
-                                    key={tab.screen.title}
-                                    name={tab.screen.title}
-                                    component={tab.screen.component}
-                                    options={({ navigation }) => ({
-                                        header: () => (
-                                            <Header
-                                                title={tab.screen.title}
-                                                isNotFirstScreen={i > 0}
-                                                style={screenHeaderStyle || { backgroundColor: theme?.background }}
-                                                titleStyle={screenTitleStyle || { color: theme?.text }}
-                                                backIcon={backIcon?.icon || "chevron-left"}
-                                                backIconStyle={backIcon?.style}
-                                                backIconSize={backIcon?.size}
-                                                backIconColor={backIcon?.color || theme?.text}
-                                                navigation={navigation}
-                                            />
-                                        )
-                                    })}
-                                />
-                            )
-                        })
-                    }
-                </Stack.Navigator>
+
+                {
+                    screens.length <= 0 ? (emptyScreen?.component != undefined ? <emptyScreen.component /> : <EmptyScreen theme={theme} style={emptyScreen?.style} textStyle={emptyScreen?.textStyle}/>) : (
+                        <Stack.Navigator>
+                            {
+                                screens.map((screen, i) => {
+                                    return (
+                                        <Stack.Screen
+                                            key={screen.id}
+                                            name={screen.id}
+                                            component={screen.component}
+                                            options={({ navigation }) => ({
+                                                animationEnabled: i > 0 && !(Platform.OS == "web"),
+                                                header: () => (
+                                                    <Header
+                                                        title={screen.title}
+                                                        isNotFirstScreen={i > 0}
+                                                        style={screenHeaderStyle || { backgroundColor: theme?.background }}
+                                                        titleStyle={screenTitleStyle || { color: theme?.text }}
+                                                        backIcon={backIcon?.icon || "chevron-left"}
+                                                        backIconStyle={backIcon?.style}
+                                                        backIconSize={backIcon?.size}
+                                                        backIconColor={backIcon?.color || theme?.text}
+                                                        navigation={navigation}
+                                                    />
+                                                )
+                                            })}
+                                        />
+                                    )
+                                })
+                            }
+                        </Stack.Navigator>
+                    )
+                }
             </View>
+        </View>
+    )
+}
+
+interface EmptyScreenProps {
+    theme?: Theme;
+    style?: ViewStyle;
+    textStyle?: TextStyle;
+}
+
+const EmptyScreen: React.FC<EmptyScreenProps> = ({
+    theme,
+    style,
+    textStyle
+}) => {
+    return (
+        <View
+            style={[
+                {
+                    flex: 1,
+                    justifyContent: "center",
+                    alignItems: "center",
+                    backgroundColor: style?.backgroundColor || theme?.background
+                },
+                style
+            ]}
+        >
+            <Text
+                style={[
+                    {
+                        color: textStyle?.color || theme?.text,
+                        fontWeight: textStyle?.fontWeight || "bold"
+                    },
+                    textStyle
+                ]}
+            >No item selected</Text>
         </View>
     )
 }

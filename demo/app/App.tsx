@@ -1,4 +1,5 @@
 import { NavigationContainer } from '@react-navigation/native';
+import { StatusBar, Text, View } from 'react-native';
 import { GoodNavigator } from './src/navigators/GoodNavigator';
 import { Tab } from './src/navigators/types';
 import { Account } from './src/screens/Account';
@@ -54,6 +55,7 @@ export default function App() {
 
   return (
     <NavigationContainer>
+      <StatusBar/>
       <GoodNavigator
         tabbarProps={{
           tabs: tabs,
@@ -61,7 +63,8 @@ export default function App() {
         }}
         drawerProps={{
           tabs: tabs,
-          drawerTitle: "Navigator"
+          drawerTitle: "Navigator",
+          landingTab: tabs[0],
         }}
         theme={theme}
       />

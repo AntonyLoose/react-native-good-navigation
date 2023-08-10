@@ -28,11 +28,12 @@ class NavigationSession {
     public navigateOnLoad = () => {}
 
     /**
-     * Clears the screens and sets the first screen
+     * Clears the screens and sets the first screen (optional)
      * @param setFirstScreen the only screen that will be rendered in the stack
      */
-    public clearScreens(setFirstScreen: Screen){
-        this._screens = [setFirstScreen];
+    public clearScreens(setFirstScreen?: Screen){
+        this._screens = [];
+        setFirstScreen != undefined ? this.screens.push(setFirstScreen) : null;
         NavigationStateManager.screenStackUpdated.publish();
     }
 

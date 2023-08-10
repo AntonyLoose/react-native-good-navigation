@@ -1,12 +1,12 @@
 import React from "react";
 import { Dimensions } from "react-native";
-import { DrawerNavigator, DrawerNavigatorProps } from "./DrawerNavigator";
+import { DrawerNavigator, DrawerProps } from "./DrawerNavigator";
 import { TabNavigator, TabNavigatorProps } from "./TabNavigator";
 import { Tab, Theme } from "./types";
 
 interface Props {
     theme?: Theme;
-    drawerProps: DrawerNavigatorProps;
+    drawerProps: DrawerProps;
     tabbarProps: TabNavigatorProps;
 }
 
@@ -29,6 +29,8 @@ export const GoodNavigator: React.FC<Props> = ({ theme, drawerProps, tabbarProps
             tabs={drawerProps.tabs}
             drawerTitle={drawerProps.drawerTitle}
             theme={drawerProps.theme || theme}
+            landingTab={drawerProps.landingTab}
+            emptyScreen={drawerProps.emptyScreen}
         />
     }else{
         return <TabNavigator

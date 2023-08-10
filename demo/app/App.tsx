@@ -59,11 +59,7 @@ export default function App() {
       <GoodNavigator
         tabbarProps={{
           tabs: tabs,
-          landingTab: tabs[0],
-          iconColor: theme.secondary,
-          labelStyle: {
-            color: theme.secondary
-          }
+          landingTab: tabs[0]
         }}
         drawerProps={{
           tabs: tabs,

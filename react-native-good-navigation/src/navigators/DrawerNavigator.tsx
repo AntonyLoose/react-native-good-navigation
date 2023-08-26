@@ -39,7 +39,7 @@ export interface DrawerProps {
     };
     sidebarStyle?: {
         style: ViewStyle,
-        titleStyle: TextStyle
+        titleStyle?: TextStyle
     };
     labelStyle?: TextStyle;
     drawerTitleStyle?: TextStyle;
@@ -203,7 +203,7 @@ export const DrawerNavigator: React.FC<DrawerProps> = ({
                     <Sidebar 
                         Screen={activeTab.sidebar.component}
                         title={activeTab.sidebar.title}
-                        titleStyle={activeTab.sidebar.titleStyle || sidebarStyle?.titleStyle || { color: theme?.text }}
+                        titleStyle={activeTab.sidebar?.titleStyle || sidebarStyle?.titleStyle || { color: theme?.text }}
                         style={activeTab.sidebar.style || sidebarStyle?.style || { backgroundColor: theme?.background }}
                         drawerVisible={drawerVisible}
                         toggleDrawerIcon={{
@@ -408,7 +408,8 @@ const Sidebar: React.FC<SidebarProps> = ({ Screen, title, drawerVisible, toggleD
                     borderColor: style?.borderColor || theme?.border || "#e8e8e8",
                     width: style?.width || "25%",
                     height: "100%",
-                    paddingTop: style?.paddingTop || 20
+                    paddingTop: style?.paddingTop || 20,
+                    backgroundColor: style?.backgroundColor || theme?.background || "#FFFFFF"
                 },
                 style
             ]}

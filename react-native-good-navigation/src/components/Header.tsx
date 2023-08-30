@@ -1,6 +1,6 @@
 import { NavigationProp, ParamListBase } from "@react-navigation/native";
 import React from "react"
-import { Platform, Text, TextStyle, View, ViewStyle } from "react-native"
+import { Dimensions, Platform, Text, TextStyle, View, ViewStyle } from "react-native"
 import { getScreenType } from "../navigators/types";
 import { NavigationSession } from "../state/NavigationSession";
 import { PressableIcon } from "./PressableIcon";
@@ -48,6 +48,7 @@ export const Header: React.FC<Props> = ({
                     {
                         fontWeight: titleStyle?.fontWeight || "bold",
                         fontSize: titleStyle?.fontSize || 55,
+                        width: Dimensions.get("window").width - (isNotFirstScreen ? (backIconSize || 60) : 0) - (isNotFirstScreen ? 5 : 20)
                     },
                     titleStyle
                 ]}

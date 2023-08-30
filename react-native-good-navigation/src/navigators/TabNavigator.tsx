@@ -113,33 +113,26 @@ export const TabNavigator: React.FC<TabNavigatorProps> = ({
                 </Stack.Navigator>
             </TopSafeAreaView>
 
-            <SafeAreaView 
-                edges={["bottom"]}
-                style={{
-                    backgroundColor: tabbarStyle?.backgroundColor || theme?.background
-                }}
-            >
-                <View
-                    style={[
-                        {
-                            flexDirection: "row",
-                            width: "100%",
-                            paddingVertical: 10,
-                            backgroundColor: tabbarStyle?.backgroundColor || theme?.background
-                        },
-                        tabbarStyle
-                    ]}
-                >
+            <View
+                style={[
                     {
-                        tabs.map((tab, i) => {
-                            const focused = tab.label == activeTab.label;
-                            return (
-                                <TabComponent key={i} onPress={onTabPress} tab={tab} color={(focused ? (tab.icon?.tabbarStyle?.overrideFocusedColor || focusedIconColor) : tab.icon?.tabbarStyle?.overrideColor) || iconColor || theme?.text || "#FFFFFF"} size={iconSize} focused={focused} theme={theme} labelStyle={labelStyle}/>
-                            )
-                        })
-                    }
-                </View>
-            </SafeAreaView>
+                        flexDirection: "row",
+                        width: "100%",
+                        paddingBottom: 10,
+                        backgroundColor: tabbarStyle?.backgroundColor || theme?.background
+                    },
+                    tabbarStyle
+                ]}
+            >
+                {
+                    tabs.map((tab, i) => {
+                        const focused = tab.label == activeTab.label;
+                        return (
+                            <TabComponent key={i} onPress={onTabPress} tab={tab} color={(focused ? (tab.icon?.tabbarStyle?.overrideFocusedColor || focusedIconColor) : tab.icon?.tabbarStyle?.overrideColor) || iconColor || theme?.text || "#FFFFFF"} size={iconSize} focused={focused} theme={theme} labelStyle={labelStyle}/>
+                        )
+                    })
+                }
+            </View>
 
         </View>
     )

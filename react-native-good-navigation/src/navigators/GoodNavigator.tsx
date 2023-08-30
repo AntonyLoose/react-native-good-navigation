@@ -49,6 +49,7 @@ export const GoodNavigator: React.FC<Props> = ({ theme, drawerProps, tabbarProps
             focusedIconColor={tabbarProps.focusedIconColor}
             iconSize={tabbarProps.iconSize}
             labelStyle={tabbarProps.labelStyle}
+            Wrapper={tabbarProps.Wrapper}
         />
     }
 }

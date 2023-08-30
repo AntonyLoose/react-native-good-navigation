@@ -1,9 +1,8 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { useEffect, useState } from "react";
 import { Platform, Pressable, TextStyle, View, ViewStyle } from "react-native"
 import { SafeAreaView } from "react-native-safe-area-context";
-import { SafeAreaView as TopSafeAreaView } from "react-native";
 import { Text } from "react-native"
 import { Header } from "../components/Header";
 import { PressableIcon } from "../components/PressableIcon";
@@ -23,6 +22,7 @@ export interface TabNavigatorProps {
     focusedIconColor?: string,
     iconSize?: number;
     labelStyle?: TextStyle;
+    Wrapper?: React.ComponentType<{ children: ReactNode }>; 
 }
 
 export const TabNavigator: React.FC<TabNavigatorProps> = ({ 
@@ -36,9 +36,9 @@ export const TabNavigator: React.FC<TabNavigatorProps> = ({
     iconColor,
     focusedIconColor,
     iconSize = 40,
-    labelStyle
+    labelStyle,
+    Wrapper
 }) => {
-
     const [activeTab, setActiveTab] = useState<Tab>(landingTab || tabs[0]);
     const [screens, setScreens] = useState<Screen[]>([activeTab.screen]);
 
@@ -69,14 +69,15 @@ export const TabNavigator: React.FC<TabNavigatorProps> = ({
     return (
         <View
             style={{
-                flex: 1
+                flex: 1,
             }}
         >
-            <TopSafeAreaView
+            <SafeAreaView
                 style={{
                     flex: 1,
                     backgroundColor: headerStyle?.backgroundColor || theme?.background
                 }}
+                edges={["top"]}
             >
                 <Stack.Navigator
                     screenOptions={{
@@ -111,28 +112,43 @@ export const TabNavigator: React.FC<TabNavigatorProps> = ({
                         })
                     }
                 </Stack.Navigator>
-            </TopSafeAreaView>
-
-            <View
-                style={[
-                    {
-                        flexDirection: "row",
-                        width: "100%",
-                        paddingBottom: 10,
-                        backgroundColor: tabbarStyle?.backgroundColor || theme?.background
-                    },
-                    tabbarStyle
-                ]}
-            >
-                {
-                    tabs.map((tab, i) => {
-                        const focused = tab.label == activeTab.label;
-                        return (
-                            <TabComponent key={i} onPress={onTabPress} tab={tab} color={(focused ? (tab.icon?.tabbarStyle?.overrideFocusedColor || focusedIconColor) : tab.icon?.tabbarStyle?.overrideColor) || iconColor || theme?.text || "#FFFFFF"} size={iconSize} focused={focused} theme={theme} labelStyle={labelStyle}/>
-                        )
-                    })
-                }
-            </View>
+            </SafeAreaView>
+            
+            {
+                Wrapper != undefined ? (
+                    <Wrapper>
+                        {
+                            tabs.map((tab, i) => {
+                                const focused = tab.label == activeTab.label;
+                                return (
+                                    <TabComponent key={i} onPress={onTabPress} tab={tab} color={(focused ? (tab.icon?.tabbarStyle?.overrideFocusedColor || focusedIconColor) : tab.icon?.tabbarStyle?.overrideColor) || iconColor || theme?.text || "#FFFFFF"} size={iconSize} focused={focused} theme={theme} labelStyle={labelStyle}/>
+                                )
+                            })
+                        }
+                    </Wrapper>
+                ) : (
+                    <View
+                        style={[
+                            {
+                                flexDirection: "row",
+                                width: "100%",
+                                paddingBottom: 10,
+                                backgroundColor: tabbarStyle?.backgroundColor || theme?.background
+                            },
+                            tabbarStyle
+                        ]}
+                    >
+                        {
+                            tabs.map((tab, i) => {
+                                const focused = tab.label == activeTab.label;
+                                return (
+                                    <TabComponent key={i} onPress={onTabPress} tab={tab} color={(focused ? (tab.icon?.tabbarStyle?.overrideFocusedColor || focusedIconColor) : tab.icon?.tabbarStyle?.overrideColor) || iconColor || theme?.text || "#FFFFFF"} size={iconSize} focused={focused} theme={theme} labelStyle={labelStyle}/>
+                                )
+                            })
+                        }
+                    </View>
+                )
+            }
 
         </View>
     )

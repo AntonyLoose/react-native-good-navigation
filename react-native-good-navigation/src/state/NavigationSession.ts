@@ -52,13 +52,19 @@ class NavigationSession {
      * @param screen the screen to navigate to
      * @param navigation the navigation prop
      * @param title the title of the screen, this sets the title in the header component of our navigation
+     * @param id the id of the screen, this methods prevents two screens with the same id from being added
      */
-    public navigateTo(screen: React.FC<ScreenProps>, navigation: NavigationProp<ParamListBase>, title: string){
+    public navigateTo(screen: React.FC<ScreenProps>, navigation: NavigationProp<ParamListBase>, title: string, id: string){
         if (navigation == undefined){
             this._screens = [];
         }
+        if (this._screens.filter(screen => screen.id == id).length >= 1){
+            console.error(`Cannot add two screens with the same id ${id}`);
+            return;
+        }
+
         this._screens.push({
-            id: title, // TODO
+            id: id,
             component: screen,
             title: title
         });

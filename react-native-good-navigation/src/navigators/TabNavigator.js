@@ -47,7 +47,7 @@ const TabNavigator = ({ tabs, landingTab, theme, headerStyle, tabbarStyle, title
                     // We have to disable as we cannot override the method called on back
                     gestureEnabled: false // TODO: replace this gesture
                 } }, screens.map((screen, i) => {
-                return (react_1.default.createElement(Stack.Screen, { key: screen.id, name: screen.id, component: screen.component, options: ({ navigation }) => ({
+                return (react_1.default.createElement(Stack.Screen, { key: screen.id, name: screen.title, component: screen.component, options: ({ navigation }) => ({
                         animationEnabled: i > 0 && !(react_native_1.Platform.OS == "web"),
                         header: () => (react_1.default.createElement(Header_1.Header, { title: screen.title, isNotFirstScreen: i > 0, style: headerStyle || { backgroundColor: theme === null || theme === void 0 ? void 0 : theme.background }, titleStyle: titleStyle || { color: theme === null || theme === void 0 ? void 0 : theme.text }, backIcon: backIcon === null || backIcon === void 0 ? void 0 : backIcon.icon, backIconSize: backIcon === null || backIcon === void 0 ? void 0 : backIcon.size, backIconColor: (backIcon === null || backIcon === void 0 ? void 0 : backIcon.color) || (theme === null || theme === void 0 ? void 0 : theme.text), navigation: navigation }))
                     }) }));

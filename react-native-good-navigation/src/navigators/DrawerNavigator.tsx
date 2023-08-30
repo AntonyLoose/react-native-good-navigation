@@ -255,7 +255,7 @@ export const DrawerNavigator: React.FC<DrawerProps> = ({
                                     return (
                                         <Stack.Screen
                                             key={screen.id}
-                                            name={screen.id}
+                                            name={screen.title}
                                             component={screen.component}
                                             options={({ navigation }) => ({
                                                 animationEnabled: i > 0 && !(Platform.OS == "web"),

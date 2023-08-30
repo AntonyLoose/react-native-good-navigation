@@ -25,6 +25,7 @@ const Header = ({ title, isNotFirstScreen, navigation, titleStyle, style, backIc
                 {
                     fontWeight: (titleStyle === null || titleStyle === void 0 ? void 0 : titleStyle.fontWeight) || "bold",
                     fontSize: (titleStyle === null || titleStyle === void 0 ? void 0 : titleStyle.fontSize) || 55,
+                    width: react_native_1.Dimensions.get("window").width - (isNotFirstScreen ? (backIconSize || 60) : 0) - (isNotFirstScreen ? 5 : 20)
                 },
                 titleStyle
             ] }, title)));

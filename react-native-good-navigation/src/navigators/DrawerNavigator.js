@@ -14,6 +14,7 @@ const PressableIcon_1 = require("../components/PressableIcon");
 const NavigationSession_1 = require("../state/NavigationSession");
 const NavigationStateManager_1 = require("../state/NavigationStateManager");
 const DrawerNavigator = ({ tabs, drawerTitle, landingTab, theme, drawerTitleStyle, drawerStyle, borderColor, drawerTabUnfocusedStyle, drawerTabFocusedStyle, toggleDrawerIcon, sidebarStyle, labelStyle, screenHeaderStyle, screenTitleStyle, backIcon, tabIconStyle, emptyScreen }) => {
+    var _a;
     const [activeTab, setActiveTab] = (0, react_2.useState)(landingTab || tabs[0]);
     const [drawerVisible, setDrawerVisible] = (0, react_2.useState)(true);
     const [screens, setScreens] = (0, react_2.useState)(activeTab.sidebar == undefined ? [activeTab.screen] : []);
@@ -85,7 +86,7 @@ const DrawerNavigator = ({ tabs, drawerTitle, landingTab, theme, drawerTitleStyl
                         const focused = tab.screen.title == activeTab.screen.title;
                         return (react_1.default.createElement(TabComponent, { key: i, tab: tab, onPress: onTabPress, focused: focused, iconStyle: tabIconStyle, height: focused ? drawerTabFocusedStyle === null || drawerTabFocusedStyle === void 0 ? void 0 : drawerTabFocusedStyle.height : drawerTabUnfocusedStyle === null || drawerTabUnfocusedStyle === void 0 ? void 0 : drawerTabUnfocusedStyle.height, width: focused ? drawerTabFocusedStyle === null || drawerTabFocusedStyle === void 0 ? void 0 : drawerTabFocusedStyle.width : drawerTabUnfocusedStyle === null || drawerTabUnfocusedStyle === void 0 ? void 0 : drawerTabUnfocusedStyle.width, padding: focused ? drawerTabFocusedStyle === null || drawerTabFocusedStyle === void 0 ? void 0 : drawerTabFocusedStyle.padding : drawerTabUnfocusedStyle === null || drawerTabUnfocusedStyle === void 0 ? void 0 : drawerTabUnfocusedStyle.padding, labelStyle: (focused ? drawerTabFocusedStyle === null || drawerTabFocusedStyle === void 0 ? void 0 : drawerTabFocusedStyle.overrideLabelStyle : drawerTabUnfocusedStyle === null || drawerTabUnfocusedStyle === void 0 ? void 0 : drawerTabUnfocusedStyle.overrideLabelStyle) || labelStyle, theme: theme, style: focused ? drawerTabFocusedStyle === null || drawerTabFocusedStyle === void 0 ? void 0 : drawerTabFocusedStyle.style : drawerTabUnfocusedStyle === null || drawerTabUnfocusedStyle === void 0 ? void 0 : drawerTabUnfocusedStyle.style }));
                     }))))),
-        activeTab.sidebar == undefined ? undefined : (react_1.default.createElement(Sidebar, { Screen: activeTab.sidebar.component, title: activeTab.sidebar.title, titleStyle: activeTab.sidebar.titleStyle || (sidebarStyle === null || sidebarStyle === void 0 ? void 0 : sidebarStyle.titleStyle) || { color: theme === null || theme === void 0 ? void 0 : theme.text }, style: activeTab.sidebar.style || (sidebarStyle === null || sidebarStyle === void 0 ? void 0 : sidebarStyle.style) || { backgroundColor: theme === null || theme === void 0 ? void 0 : theme.background }, drawerVisible: drawerVisible, toggleDrawerIcon: {
+        activeTab.sidebar == undefined ? undefined : (react_1.default.createElement(Sidebar, { Screen: activeTab.sidebar.component, title: activeTab.sidebar.title, titleStyle: ((_a = activeTab.sidebar) === null || _a === void 0 ? void 0 : _a.titleStyle) || (sidebarStyle === null || sidebarStyle === void 0 ? void 0 : sidebarStyle.titleStyle) || { color: theme === null || theme === void 0 ? void 0 : theme.text }, style: activeTab.sidebar.style || (sidebarStyle === null || sidebarStyle === void 0 ? void 0 : sidebarStyle.style) || { backgroundColor: theme === null || theme === void 0 ? void 0 : theme.background }, drawerVisible: drawerVisible, toggleDrawerIcon: {
                 icon: (toggleDrawerIcon === null || toggleDrawerIcon === void 0 ? void 0 : toggleDrawerIcon.icon) || "book-open-outline",
                 size: (toggleDrawerIcon === null || toggleDrawerIcon === void 0 ? void 0 : toggleDrawerIcon.size) || 30,
                 color: (toggleDrawerIcon === null || toggleDrawerIcon === void 0 ? void 0 : toggleDrawerIcon.color) || (theme === null || theme === void 0 ? void 0 : theme.text) || "#000000",
@@ -165,27 +166,25 @@ const Sidebar = ({ Screen, title, drawerVisible, toggleDrawerIcon, titleStyle, t
                 borderColor: (style === null || style === void 0 ? void 0 : style.borderColor) || (theme === null || theme === void 0 ? void 0 : theme.border) || "#e8e8e8",
                 width: (style === null || style === void 0 ? void 0 : style.width) || "25%",
                 height: "100%",
-                paddingTop: (style === null || style === void 0 ? void 0 : style.paddingTop) || 20
+                paddingTop: (style === null || style === void 0 ? void 0 : style.paddingTop) || 20,
+                backgroundColor: (style === null || style === void 0 ? void 0 : style.backgroundColor) || (theme === null || theme === void 0 ? void 0 : theme.background) || "#FFFFFF"
             },
             style
         ] },
-        react_1.default.createElement(react_native_1.SafeAreaView, { style: {
-                flex: 1
+        react_1.default.createElement(react_native_1.View, { style: {
+                flexDirection: "row",
+                alignItems: "center",
+                paddingHorizontal: 20
             } },
-            react_1.default.createElement(react_native_1.View, { style: {
-                    flexDirection: "row",
-                    alignItems: "center",
-                    paddingHorizontal: 20
-                } },
-                drawerVisible ? undefined : (react_1.default.createElement(PressableIcon_1.PressableIcon, { icon: toggleDrawerIcon.icon, size: toggleDrawerIcon.size, color: toggleDrawerIcon.color, onPress: toggleDrawerIcon.onPress })),
-                react_1.default.createElement(react_native_1.Text, { style: [
-                        {
-                            fontWeight: (titleStyle === null || titleStyle === void 0 ? void 0 : titleStyle.fontWeight) || "bold",
-                            fontSize: (titleStyle === null || titleStyle === void 0 ? void 0 : titleStyle.fontSize) || 25,
-                            paddingLeft: !drawerVisible ? 20 : 0,
-                            color: (titleStyle === null || titleStyle === void 0 ? void 0 : titleStyle.color) || (theme === null || theme === void 0 ? void 0 : theme.text)
-                        },
-                        titleStyle
-                    ] }, title)),
-            react_1.default.createElement(Screen, null))));
+            drawerVisible ? undefined : (react_1.default.createElement(PressableIcon_1.PressableIcon, { icon: toggleDrawerIcon.icon, size: toggleDrawerIcon.size, color: toggleDrawerIcon.color, onPress: toggleDrawerIcon.onPress })),
+            react_1.default.createElement(react_native_1.Text, { style: [
+                    {
+                        fontWeight: (titleStyle === null || titleStyle === void 0 ? void 0 : titleStyle.fontWeight) || "bold",
+                        fontSize: (titleStyle === null || titleStyle === void 0 ? void 0 : titleStyle.fontSize) || 25,
+                        paddingLeft: !drawerVisible ? 20 : 0,
+                        color: (titleStyle === null || titleStyle === void 0 ? void 0 : titleStyle.color) || (theme === null || theme === void 0 ? void 0 : theme.text)
+                    },
+                    titleStyle
+                ] }, title)),
+        react_1.default.createElement(Screen, null)));
 };

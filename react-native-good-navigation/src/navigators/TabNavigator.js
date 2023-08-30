@@ -8,7 +8,6 @@ const react_1 = __importDefault(require("react"));
 const stack_1 = require("@react-navigation/stack");
 const react_2 = require("react");
 const react_native_1 = require("react-native");
-const react_native_safe_area_context_1 = require("react-native-safe-area-context");
 const react_native_2 = require("react-native");
 const react_native_3 = require("react-native");
 const Header_1 = require("../components/Header");
@@ -53,20 +52,19 @@ const TabNavigator = ({ tabs, landingTab, theme, headerStyle, tabbarStyle, title
                         header: () => (react_1.default.createElement(Header_1.Header, { title: screen.title, isNotFirstScreen: i > 0, style: headerStyle || { backgroundColor: theme === null || theme === void 0 ? void 0 : theme.background }, titleStyle: titleStyle || { color: theme === null || theme === void 0 ? void 0 : theme.text }, backIcon: backIcon === null || backIcon === void 0 ? void 0 : backIcon.icon, backIconSize: backIcon === null || backIcon === void 0 ? void 0 : backIcon.size, backIconColor: (backIcon === null || backIcon === void 0 ? void 0 : backIcon.color) || (theme === null || theme === void 0 ? void 0 : theme.text), navigation: navigation }))
                     }) }));
             }))),
-        react_1.default.createElement(react_native_safe_area_context_1.SafeAreaView, { edges: ["bottom"] },
-            react_1.default.createElement(react_native_1.View, { style: [
-                    {
-                        flexDirection: "row",
-                        width: "100%",
-                        paddingVertical: 10,
-                        backgroundColor: (tabbarStyle === null || tabbarStyle === void 0 ? void 0 : tabbarStyle.backgroundColor) || (theme === null || theme === void 0 ? void 0 : theme.background)
-                    },
-                    tabbarStyle
-                ] }, tabs.map((tab, i) => {
-                var _a, _b, _c, _d;
-                const focused = tab.label == activeTab.label;
-                return (react_1.default.createElement(TabComponent, { key: i, onPress: onTabPress, tab: tab, color: (focused ? (((_b = (_a = tab.icon) === null || _a === void 0 ? void 0 : _a.tabbarStyle) === null || _b === void 0 ? void 0 : _b.overrideFocusedColor) || focusedIconColor) : (_d = (_c = tab.icon) === null || _c === void 0 ? void 0 : _c.tabbarStyle) === null || _d === void 0 ? void 0 : _d.overrideColor) || iconColor || (theme === null || theme === void 0 ? void 0 : theme.text) || "#FFFFFF", size: iconSize, focused: focused, theme: theme, labelStyle: labelStyle }));
-            })))));
+        react_1.default.createElement(react_native_1.View, { style: [
+                {
+                    flexDirection: "row",
+                    width: "100%",
+                    paddingBottom: 10,
+                    backgroundColor: (tabbarStyle === null || tabbarStyle === void 0 ? void 0 : tabbarStyle.backgroundColor) || (theme === null || theme === void 0 ? void 0 : theme.background)
+                },
+                tabbarStyle
+            ] }, tabs.map((tab, i) => {
+            var _a, _b, _c, _d;
+            const focused = tab.label == activeTab.label;
+            return (react_1.default.createElement(TabComponent, { key: i, onPress: onTabPress, tab: tab, color: (focused ? (((_b = (_a = tab.icon) === null || _a === void 0 ? void 0 : _a.tabbarStyle) === null || _b === void 0 ? void 0 : _b.overrideFocusedColor) || focusedIconColor) : (_d = (_c = tab.icon) === null || _c === void 0 ? void 0 : _c.tabbarStyle) === null || _d === void 0 ? void 0 : _d.overrideColor) || iconColor || (theme === null || theme === void 0 ? void 0 : theme.text) || "#FFFFFF", size: iconSize, focused: focused, theme: theme, labelStyle: labelStyle }));
+        }))));
 };
 exports.TabNavigator = TabNavigator;
 const TabComponent = ({ tab, color, size, focused, onPress, theme, labelStyle }) => {

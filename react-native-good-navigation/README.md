@@ -376,5 +376,4 @@ TODO
 `antony35007@gmail.com`
 
 ## Changelog
-
-TODO
+[Change Log](./CHANGELOG.md)

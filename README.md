@@ -8,4 +8,4 @@ adds the screen to the stack and publishes state to re-render the screen, facili
 Responsive Design: It renders a tab bar on mobile and a sidebar on web and tablet, aligning more with native applications and enhancing 
 user experiences by offering a consistent and responsive navigation interface.
 
-For more detail documentation view the README in the package folder.
+For more detail documentation view the [README](./react-native-good-navigation/README.md) in the package folder.

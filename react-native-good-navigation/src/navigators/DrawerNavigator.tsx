@@ -1,5 +1,5 @@
 import React from "react";
-import { createStackNavigator } from "@react-navigation/stack";
+import { CardStyleInterpolators, createStackNavigator, TransitionSpecs } from "@react-navigation/stack";
 import { useEffect, useState } from "react";
 import { DimensionValue, Platform, Pressable, SafeAreaView, Text, TextStyle, View, ViewStyle } from "react-native"
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
@@ -270,7 +270,12 @@ export const DrawerNavigator: React.FC<DrawerProps> = ({
                                                         backIconColor={backIcon?.color || theme?.text}
                                                         navigation={navigation}
                                                     />
-                                                )
+                                                ),
+                                                transitionSpec: {
+                                                    open: TransitionSpecs.TransitionIOSSpec,
+                                                    close: TransitionSpecs.TransitionIOSSpec,
+                                                },
+                                                cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
                                             })}
                                         />
                                     )

@@ -106,7 +106,12 @@ const DrawerNavigator = ({ tabs, drawerTitle, landingTab, theme, drawerTitleStyl
             screens.length <= 0 ? ((emptyScreen === null || emptyScreen === void 0 ? void 0 : emptyScreen.component) != undefined ? react_1.default.createElement(emptyScreen.component, null) : react_1.default.createElement(EmptyScreen, { theme: theme, style: emptyScreen === null || emptyScreen === void 0 ? void 0 : emptyScreen.style, textStyle: emptyScreen === null || emptyScreen === void 0 ? void 0 : emptyScreen.textStyle })) : (react_1.default.createElement(Stack.Navigator, null, screens.map((screen, i) => {
                 return (react_1.default.createElement(Stack.Screen, { key: screen.id, name: screen.title, component: screen.component, options: ({ navigation }) => ({
                         animationEnabled: i > 0 && !(react_native_1.Platform.OS == "web"),
-                        header: () => (react_1.default.createElement(Header_1.Header, { title: screen.title, isNotFirstScreen: i > 0, style: screenHeaderStyle || { backgroundColor: theme === null || theme === void 0 ? void 0 : theme.background }, titleStyle: screenTitleStyle || { color: theme === null || theme === void 0 ? void 0 : theme.text }, backIcon: (backIcon === null || backIcon === void 0 ? void 0 : backIcon.icon) || "chevron-left", backIconSize: backIcon === null || backIcon === void 0 ? void 0 : backIcon.size, backIconColor: (backIcon === null || backIcon === void 0 ? void 0 : backIcon.color) || (theme === null || theme === void 0 ? void 0 : theme.text), navigation: navigation }))
+                        header: () => (react_1.default.createElement(Header_1.Header, { title: screen.title, isNotFirstScreen: i > 0, style: screenHeaderStyle || { backgroundColor: theme === null || theme === void 0 ? void 0 : theme.background }, titleStyle: screenTitleStyle || { color: theme === null || theme === void 0 ? void 0 : theme.text }, backIcon: (backIcon === null || backIcon === void 0 ? void 0 : backIcon.icon) || "chevron-left", backIconSize: backIcon === null || backIcon === void 0 ? void 0 : backIcon.size, backIconColor: (backIcon === null || backIcon === void 0 ? void 0 : backIcon.color) || (theme === null || theme === void 0 ? void 0 : theme.text), navigation: navigation })),
+                        transitionSpec: {
+                            open: stack_1.TransitionSpecs.TransitionIOSSpec,
+                            close: stack_1.TransitionSpecs.TransitionIOSSpec,
+                        },
+                        cardStyleInterpolator: stack_1.CardStyleInterpolators.forHorizontalIOS,
                     }) }));
             }))))));
 };

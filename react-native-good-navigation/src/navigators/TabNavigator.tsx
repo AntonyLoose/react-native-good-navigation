@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import { createStackNavigator } from "@react-navigation/stack";
+import { CardStyleInterpolators, createStackNavigator, TransitionSpecs } from "@react-navigation/stack";
 import { useEffect, useState } from "react";
 import { Platform, Pressable, TextStyle, View, ViewStyle } from "react-native"
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -105,7 +105,12 @@ export const TabNavigator: React.FC<TabNavigatorProps> = ({
                                                 backIconColor={backIcon?.color || theme?.text}
                                                 navigation={navigation}
                                             />
-                                        )
+                                        ),
+                                        transitionSpec: {
+                                            open: TransitionSpecs.TransitionIOSSpec,
+                                            close: TransitionSpecs.TransitionIOSSpec,
+                                        },
+                                        cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
                                     })}
                                 />
                             )

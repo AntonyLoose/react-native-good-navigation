@@ -23,110 +23,110 @@ import { Button, View } from "react-native";
 import { NavigationContainer } from '@react-navigation/native';
 
 const theme = {
-	background: "white",
-	text: "black",
-	border: "#e8e8e8",
-	tabFocused: "#e8e8e8"
+    background: "white",
+    text: "black",
+    border: "#e8e8e8",
+    tabFocused: "#e8e8e8"
 }
 
 const Homes: React.FC<ScreenProps> = ({ navigation }) => {
-	return (
-		<View
-			style={{
-				flex: 1,
-				backgroundColor: theme.background,
-				padding: 20
-			}}
-		>
-			<Button
-				title={"Home 1"}
-				onPress={() => NavigationSession.inst.navigateTo(HomeScreen, navigation, "Home 1", "Unique ID")}
-			/>
+    return (
+        <View
+            style={{
+		flex: 1,
+		backgroundColor: theme.background,
+		padding: 20
+	    }}
+        >
+	    <Button
+		title={"Home 1"}
+		onPress={() => NavigationSession.inst.navigateTo(HomeScreen, navigation, "Home 1",
+		"Unique ID")}
+	    />
 	
-			<Button	
-				title={"Home 2"}
-				onPress={() => NavigationSession.inst.navigateTo(HomeScreen, navigation, "Home 2", "Unique ID")}
-			/>
-		</View>
-	)
+	    <Button	
+		title={"Home 2"}
+		onPress={() => NavigationSession.inst.navigateTo(HomeScreen, navigation, "Home 2",
+		"Unique ID")}
+	    />
+	</View>
+    )
 }
 
 const HomeScreen: React.FC<ScreenProps> = ({ navigation }) => {
-
-	return (
-		<View
-			style={{
-				flex: 1,
-				backgroundColor: theme.background,
-				padding: 20
-			}}
-		>		
-			{/* your content here */}
-		</View>
-	)	
+    return (
+	<View
+	    style={{
+		flex: 1,
+		backgroundColor: theme.background,
+		padding: 20
+	    }}
+	>		
+	    {/* your content here */}
+	</View>
+    )	
 }
 
 const Screen2: React.FC<ScreenProps> = ({ navigation }) => {
-
-	return (
-		<View
-			style={{
-				flex: 1,
-				backgroundColor: theme.background,
-				padding: 20
-			}}
-		>	
-			{/* your content here */}
-		</View>
-	)
+    return (
+	<View
+	    style={{
+		flex: 1,
+		backgroundColor: theme.background,
+		padding: 20
+	    }}
+	>	
+	    {/* your content here */}
+	</View>
+    )
 }
 
 export default function App(){
-	const tabs: Tab[] = [
-		{
-			label: "Homes",
-			screen: {
-				id: "HOMES",
-				component: Homes,
-				title: "Homes"
-			},
-			icon: {
-				focused: "home",
-				unfocused: "home-outline",
-			},
-			sidebar: {
-				component: Homes,
-				title: "Homes"
-			},
-		},
-		{
-			label: "Screen 2",
-			screen: {
-				id: "SCREEN_2",
-				component: Screen2,
-				title: "Screen 2"
-			},
-			icon: {
-				focused: "fullscreen",
-				unfocused: "fullscreen-exit",
-			}
-		}
-	]
+    const tabs: Tab[] = [
+	{
+	    label: "Homes",
+	    screen: {
+		id: "HOMES",
+		component: Homes,
+		title: "Homes"
+	    },
+	    icon: {
+		focused: "home",
+		unfocused: "home-outline",
+	    },
+	    sidebar: {
+		component: Homes,
+		title: "Homes"
+	    },
+	},
+	{
+	    label: "Screen 2",
+	    screen: {
+		id: "SCREEN_2",
+		component: Screen2,
+		title: "Screen 2"
+	    },
+	    icon: {
+		focused: "fullscreen",
+		unfocused: "fullscreen-exit",
+	    }
+	}
+    ]
 
-	return (
-		<NavigationContainer>
-			<GoodNavigator
-				tabbarProps={{
-					tabs: tabs
-				}}
-				drawerProps={{	
-					tabs: tabs,
-					drawerTitle: "Your app"
-				}}
-				theme={theme}
-			/>
-		</NavigationContainer>
-	)
+    return (
+	<NavigationContainer>
+	    <GoodNavigator
+		tabbarProps={{
+		    tabs: tabs
+		}}
+		drawerProps={{	
+		    tabs: tabs,
+		    drawerTitle: "Your app"
+		}}
+		theme={theme}
+	    />
+	</NavigationContainer>
+    )
 }
 
 ```
@@ -159,16 +159,16 @@ This navigator will render either a [TabNavigator](#TabNavigator) or [DrawerNavi
 #### Example
 ```ts
 <NavigationContainer>
-	<GoodNavigator
-		tabbarProps={{
-			tabs: tabs
-		}}
-		drawerProps={{	
-			tabs: tabs,
-			drawerTitle: "Your app"
-		}}
-		theme={theme}
-	/>
+    <GoodNavigator
+	tabbarProps={{
+	    tabs: tabs
+	}}
+	drawerProps={{	
+	    tabs: tabs,
+	    drawerTitle: "Your app"
+	}}
+	theme={theme}
+    />
 </NavigationContainer>
 ```
 

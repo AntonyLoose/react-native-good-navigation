@@ -1,5 +1,11 @@
 # react-native-good-navigation
 An implementation of react-native stack that allows screens to be added and navigated to at runtime. 
+
+![image](https://github.com/AntonyLoose/react-native-good-navigation/assets/86053464/75399bc1-9b4e-4711-a625-837eec4c93d4)
+![image](https://github.com/AntonyLoose/react-native-good-navigation/assets/86053464/c37970d7-21fa-4794-921a-2c1406869ee4)
+<img src="https://github.com/AntonyLoose/react-native-good-navigation/assets/86053464/0d2cee52-60ae-4722-ad9c-fdbb161ab78a"  width="300" height="600">
+<img src="https://github.com/AntonyLoose/react-native-good-navigation/assets/86053464/dc854e0d-abeb-450c-a284-824bd0d91949"  width="300" height="600">
+
 ## Installation
 
 `npm install react-navtive-good-navigation`

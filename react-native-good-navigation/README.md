@@ -1,5 +1,18 @@
 # react-native-good-navigation
 An implementation of react-native stack that allows screens to be added and navigated to at runtime. 
+The images below show the appearance of the navigators on wide and narrow screens. The colours can be customised.
+
+![image](https://github.com/AntonyLoose/react-native-good-navigation/assets/86053464/75399bc1-9b4e-4711-a625-837eec4c93d4)
+![image](https://github.com/AntonyLoose/react-native-good-navigation/assets/86053464/c37970d7-21fa-4794-921a-2c1406869ee4)
+<img src="https://github.com/AntonyLoose/react-native-good-navigation/assets/86053464/0d2cee52-60ae-4722-ad9c-fdbb161ab78a"  width="400" height="800">
+<img src="https://github.com/AntonyLoose/react-native-good-navigation/assets/86053464/dc854e0d-abeb-450c-a284-824bd0d91949"  width="400" height="800">
+
+![image](https://github.com/AntonyLoose/react-native-good-navigation/assets/86053464/e5370f9e-4bf6-4534-8116-52faa2dd1e01)
+![image](https://github.com/AntonyLoose/react-native-good-navigation/assets/86053464/61559af1-bacd-4a8b-b17a-13c016e155d2)
+<img src="https://github.com/AntonyLoose/react-native-good-navigation/assets/86053464/650180d2-6041-4e47-b9c5-df3cae8db3f4"  width="400" height="800">
+<img src="https://github.com/AntonyLoose/react-native-good-navigation/assets/86053464/a89829b9-6b16-40e0-92d8-bcf37ced5883"  width="400" height="800">
+
+
 ## Installation
 
 `npm install react-navtive-good-navigation`
@@ -23,110 +36,110 @@ import { Button, View } from "react-native";
 import { NavigationContainer } from '@react-navigation/native';
 
 const theme = {
-	background: "white",
-	text: "black",
-	border: "#e8e8e8",
-	tabFocused: "#e8e8e8"
+    background: "white",
+    text: "black",
+    border: "#e8e8e8",
+    tabFocused: "#e8e8e8"
 }
 
 const Homes: React.FC<ScreenProps> = ({ navigation }) => {
-	return (
-		<View
-			style={{
-				flex: 1,
-				backgroundColor: theme.background,
-				padding: 20
-			}}
-		>
-			<Button
-				title={"Home 1"}
-				onPress={() => NavigationSession.inst.navigateTo(HomeScreen, navigation, "Home 1", "Unique ID")}
-			/>
+    return (
+        <View
+            style={{
+		flex: 1,
+		backgroundColor: theme.background,
+		padding: 20
+	    }}
+        >
+	    <Button
+		title={"Home 1"}
+		onPress={() => NavigationSession.inst.navigateTo(HomeScreen, navigation, "Home 1",
+		"Unique ID")}
+	    />
 	
-			<Button	
-				title={"Home 2"}
-				onPress={() => NavigationSession.inst.navigateTo(HomeScreen, navigation, "Home 2", "Unique ID")}
-			/>
-		</View>
-	)
+	    <Button	
+		title={"Home 2"}
+		onPress={() => NavigationSession.inst.navigateTo(HomeScreen, navigation, "Home 2",
+		"Unique ID")}
+	    />
+	</View>
+    )
 }
 
 const HomeScreen: React.FC<ScreenProps> = ({ navigation }) => {
-
-	return (
-		<View
-			style={{
-				flex: 1,
-				backgroundColor: theme.background,
-				padding: 20
-			}}
-		>		
-			{/* your content here */}
-		</View>
-	)	
+    return (
+	<View
+	    style={{
+		flex: 1,
+		backgroundColor: theme.background,
+		padding: 20
+	    }}
+	>		
+	    {/* your content here */}
+	</View>
+    )	
 }
 
 const Screen2: React.FC<ScreenProps> = ({ navigation }) => {
-
-	return (
-		<View
-			style={{
-				flex: 1,
-				backgroundColor: theme.background,
-				padding: 20
-			}}
-		>	
-			{/* your content here */}
-		</View>
-	)
+    return (
+	<View
+	    style={{
+		flex: 1,
+		backgroundColor: theme.background,
+		padding: 20
+	    }}
+	>	
+	    {/* your content here */}
+	</View>
+    )
 }
 
 export default function App(){
-	const tabs: Tab[] = [
-		{
-			label: "Homes",
-			screen: {
-				id: "HOMES",
-				component: Homes,
-				title: "Homes"
-			},
-			icon: {
-				focused: "home",
-				unfocused: "home-outline",
-			},
-			sidebar: {
-				component: Homes,
-				title: "Homes"
-			},
-		},
-		{
-			label: "Screen 2",
-			screen: {
-				id: "SCREEN_2",
-				component: Screen2,
-				title: "Screen 2"
-			},
-			icon: {
-				focused: "fullscreen",
-				unfocused: "fullscreen-exit",
-			}
-		}
-	]
+    const tabs: Tab[] = [
+	{
+	    label: "Homes",
+	    screen: {
+		id: "HOMES",
+		component: Homes,
+		title: "Homes"
+	    },
+	    icon: {
+		focused: "home",
+		unfocused: "home-outline",
+	    },
+	    sidebar: {
+		component: Homes,
+		title: "Homes"
+	    },
+	},
+	{
+	    label: "Screen 2",
+	    screen: {
+		id: "SCREEN_2",
+		component: Screen2,
+		title: "Screen 2"
+	    },
+	    icon: {
+		focused: "fullscreen",
+		unfocused: "fullscreen-exit",
+	    }
+	}
+    ]
 
-	return (
-		<NavigationContainer>
-			<GoodNavigator
-				tabbarProps={{
-					tabs: tabs
-				}}
-				drawerProps={{	
-					tabs: tabs,
-					drawerTitle: "Your app"
-				}}
-				theme={theme}
-			/>
-		</NavigationContainer>
-	)
+    return (
+	<NavigationContainer>
+	    <GoodNavigator
+		tabbarProps={{
+		    tabs: tabs
+		}}
+		drawerProps={{	
+		    tabs: tabs,
+		    drawerTitle: "Your app"
+		}}
+		theme={theme}
+	    />
+	</NavigationContainer>
+    )
 }
 
 ```
@@ -159,16 +172,16 @@ This navigator will render either a [TabNavigator](#TabNavigator) or [DrawerNavi
 #### Example
 ```ts
 <NavigationContainer>
-	<GoodNavigator
-		tabbarProps={{
-			tabs: tabs
-		}}
-		drawerProps={{	
-			tabs: tabs,
-			drawerTitle: "Your app"
-		}}
-		theme={theme}
-	/>
+    <GoodNavigator
+	tabbarProps={{
+	    tabs: tabs
+	}}
+	drawerProps={{	
+	    tabs: tabs,
+	    drawerTitle: "Your app"
+	}}
+	theme={theme}
+    />
 </NavigationContainer>
 ```
 

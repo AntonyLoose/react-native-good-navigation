@@ -82,6 +82,7 @@ export const DrawerNavigator: React.FC<DrawerProps> = ({
         if (activeTab.sidebar == undefined){
             NavigationSession.inst.addScreen(activeTab.screen);
         }
+
         NavigationStateManager.screenStackUpdated.subscribe(() => {
             setScreens([...NavigationSession.inst.screens]);
         })
@@ -101,11 +102,7 @@ export const DrawerNavigator: React.FC<DrawerProps> = ({
 
     const onTabPress = (tab: Tab) => {
         NavigationSession.inst.activeTab = tab;
-        if (tab.sidebar != undefined){
-            NavigationSession.inst.clearScreens();
-        }else{
-            NavigationSession.inst.clearScreens(tab.screen);
-        }
+        NavigationSession.inst.clearScreens(tab.sidebar == undefined ? tab.screen : undefined);
         setActiveTab(tab);
     }
 
@@ -116,87 +113,26 @@ export const DrawerNavigator: React.FC<DrawerProps> = ({
                 flexDirection: "row",
             }}
         >
-            {/* Drawer */}
             { 
                 !drawerVisible ? undefined : (
-                    <View
-                        style={[
-                            {
-                                width: "25%",
-                                height: "100%",
-                                borderRightWidth: 1,
-                                borderColor: borderColor || theme?.border || "#e8e8e8",
-                                paddingTop: drawerStyle?.padding || 20,
-                                backgroundColor: drawerStyle?.backgroundColor || theme?.background
-                            },
-                            drawerStyle
-                        ]}
-                    >
-                        <SafeAreaView
-                            style={{
-                                flex: 1
-                            }}
-                        >
-                            <View
-                                style={{
-                                    flex: 1,
-                                    paddingHorizontal: 20
-                                }}
-                            >
-                                <View
-                                    style={{
-                                        flexDirection: "row",
-                                        alignItems: "center"
-                                    }}
-                                >
-                                    <PressableIcon
-                                        icon={toggleDrawerIcon?.icon || "book-open-outline"}
-                                        size={toggleDrawerIcon?.size || 30 }
-                                        color={toggleDrawerIcon?.color || theme?.text || "#000000"}
-                                        onPress={() => setDrawerVisible(false)}
-                                    />
-                                    <Text 
-                                        style={[
-                                            {
-                                                fontWeight: "bold",
-                                                fontSize: 25,
-                                                paddingLeft: 10,
-                                                color: drawerTitleStyle?.color || theme?.text
-                                            },
-                                            drawerTitleStyle
-                                        ]}   
-                                    >{drawerTitle}</Text>
-                                </View>
-
-                                {
-                                    tabs.map((tab, i) => {
-
-                                        // for demo purposes
-                                        const focused = tab.screen.title == activeTab.screen.title;
-
-                                        return (
-                                            <TabComponent  
-                                                key={i} 
-                                                tab={tab} 
-                                                onPress={onTabPress}
-                                                focused={focused}
-                                                iconStyle={tabIconStyle}
-                                                height={focused ? drawerTabFocusedStyle?.height : drawerTabUnfocusedStyle?.height} 
-                                                width={focused ? drawerTabFocusedStyle?.width : drawerTabUnfocusedStyle?.width} 
-                                                padding={focused ? drawerTabFocusedStyle?.padding : drawerTabUnfocusedStyle?.padding}
-                                                labelStyle={(focused ? drawerTabFocusedStyle?.overrideLabelStyle : drawerTabUnfocusedStyle?.overrideLabelStyle) || labelStyle} 
-                                                theme={theme}
-                                                style={focused ? drawerTabFocusedStyle?.style : drawerTabUnfocusedStyle?.style}
-                                            />
-                                        )
-                                    })
-                                }
-                            </View>
-                        </SafeAreaView>
-                    </View>
+                    <Drawer
+                        borderColor={borderColor}
+                        tabs={tabs}
+                        activeTab={activeTab}
+                        drawerTitle={drawerTitle}
+                        onTabPress={onTabPress}
+                        setDrawerVisible={setDrawerVisible}
+                        theme={theme}
+                        tabIconStyle={tabIconStyle}
+                        drawerStyle={drawerStyle}
+                        toggleDrawerIcon={toggleDrawerIcon}
+                        drawerTitleStyle={drawerTitleStyle}
+                        drawerTabFocusedStyle={drawerTabFocusedStyle}
+                        drawerTabUnfocusedStyle={drawerTabUnfocusedStyle}
+                    />
                 )
             }
-            
+
             {/* Sidebar */}
             {
                 activeTab.sidebar == undefined ? undefined : (
@@ -285,6 +221,128 @@ export const DrawerNavigator: React.FC<DrawerProps> = ({
                     )
                 }
             </View>
+        </View>
+    )
+}
+
+interface DrawerComponentProps {
+    borderColor: string;
+    tabs: Tab[];
+    activeTab: Tab;
+    drawerTitle: string;
+    onTabPress: (tab: Tab) => void;
+    setDrawerVisible: (visible: boolean) => void;
+    theme?: Theme;
+    tabIconStyle?: TabIconStyle;
+    drawerStyle?: ViewStyle;
+    toggleDrawerIcon?: {
+        color?: string,
+        icon?: string,
+        size?: number
+    };
+    drawerTitleStyle?: TextStyle;
+    drawerTabFocusedStyle?: DrawerTabStyle;
+    drawerTabUnfocusedStyle?: DrawerTabStyle;
+
+}
+
+const Drawer: React.FC<DrawerComponentProps> = ({
+    borderColor,
+    tabs,
+    activeTab,
+    drawerTitle,
+    onTabPress,
+    setDrawerVisible,
+    theme,
+    tabIconStyle,
+    drawerStyle,
+    toggleDrawerIcon,
+    drawerTitleStyle,
+    drawerTabFocusedStyle,
+    drawerTabUnfocusedStyle
+}) => {
+
+    const [localActiveTab, setLocalActiveTab] = useState(activeTab);
+
+    useEffect(() => {
+        setLocalActiveTab(activeTab);
+    }, [activeTab])
+
+    return (
+        <View
+            style={[
+                {
+                    width: "25%",
+                    height: "100%",
+                    borderRightWidth: 1,
+                    borderColor: borderColor || theme?.border || "#e8e8e8",
+                    paddingTop: drawerStyle?.padding || 20,
+                    backgroundColor: drawerStyle?.backgroundColor || theme?.background
+                },
+                drawerStyle
+            ]}
+        >
+            <SafeAreaView
+                style={{
+                    flex: 1
+                }}
+            >
+                <View
+                    style={{
+                        flex: 1,
+                        paddingHorizontal: 20
+                    }}
+                >
+                    <View
+                        style={{
+                            flexDirection: "row",
+                            alignItems: "center"
+                        }}
+                    >
+                        <PressableIcon
+                            icon={toggleDrawerIcon?.icon || "book-open-outline"}
+                            size={toggleDrawerIcon?.size || 30 }
+                            color={toggleDrawerIcon?.color || theme?.text || "#000000"}
+                            onPress={() => setDrawerVisible(false)}
+                        />
+                        <Text 
+                            style={[
+                                {
+                                    fontWeight: "bold",
+                                    fontSize: 25,
+                                    paddingLeft: 10,
+                                    color: drawerTitleStyle?.color || theme?.text
+                                },
+                                drawerTitleStyle
+                            ]}   
+                        >{drawerTitle}</Text>
+                    </View>
+
+                    {
+                        tabs.map((tab, i) => {
+
+                            // for demo purposes
+                            const focused = tab.screen.title == localActiveTab.screen.title;
+
+                            return (
+                                <TabComponent  
+                                    key={i} 
+                                    tab={tab} 
+                                    onPress={onTabPress}
+                                    focused={focused}
+                                    iconStyle={tabIconStyle}
+                                    height={focused ? drawerTabFocusedStyle?.height : drawerTabUnfocusedStyle?.height} 
+                                    width={focused ? drawerTabFocusedStyle?.width : drawerTabUnfocusedStyle?.width} 
+                                    padding={focused ? drawerTabFocusedStyle?.padding : drawerTabUnfocusedStyle?.padding}
+                                    labelStyle={(focused ? drawerTabFocusedStyle?.overrideLabelStyle : drawerTabUnfocusedStyle?.overrideLabelStyle) || labelStyle} 
+                                    theme={theme}
+                                    style={focused ? drawerTabFocusedStyle?.style : drawerTabUnfocusedStyle?.style}
+                                />
+                            )
+                        })
+                    }
+                </View>
+            </SafeAreaView>
         </View>
     )
 }

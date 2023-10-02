@@ -1,10 +1,17 @@
 # react-native-good-navigation
 An implementation of react-native stack that allows screens to be added and navigated to at runtime. 
+The images below show the appearance of the navigators on wide and narrow screens. The colours can be customised.
 
 ![image](https://github.com/AntonyLoose/react-native-good-navigation/assets/86053464/75399bc1-9b4e-4711-a625-837eec4c93d4)
 ![image](https://github.com/AntonyLoose/react-native-good-navigation/assets/86053464/c37970d7-21fa-4794-921a-2c1406869ee4)
-<img src="https://github.com/AntonyLoose/react-native-good-navigation/assets/86053464/0d2cee52-60ae-4722-ad9c-fdbb161ab78a"  width="300" height="600">
-<img src="https://github.com/AntonyLoose/react-native-good-navigation/assets/86053464/dc854e0d-abeb-450c-a284-824bd0d91949"  width="300" height="600">
+<img src="https://github.com/AntonyLoose/react-native-good-navigation/assets/86053464/0d2cee52-60ae-4722-ad9c-fdbb161ab78a"  width="400" height="800">
+<img src="https://github.com/AntonyLoose/react-native-good-navigation/assets/86053464/dc854e0d-abeb-450c-a284-824bd0d91949"  width="400" height="800">
+
+![image](https://github.com/AntonyLoose/react-native-good-navigation/assets/86053464/e5370f9e-4bf6-4534-8116-52faa2dd1e01)
+![image](https://github.com/AntonyLoose/react-native-good-navigation/assets/86053464/61559af1-bacd-4a8b-b17a-13c016e155d2)
+<img src="https://github.com/AntonyLoose/react-native-good-navigation/assets/86053464/650180d2-6041-4e47-b9c5-df3cae8db3f4"  width="400" height="800">
+<img src="https://github.com/AntonyLoose/react-native-good-navigation/assets/86053464/a89829b9-6b16-40e0-92d8-bcf37ced5883"  width="400" height="800">
+
 
 ## Installation
 

@@ -126,7 +126,16 @@ export const TabNavigator: React.FC<TabNavigatorProps> = ({
                             tabs.map((tab, i) => {
                                 const focused = tab.label == activeTab.label;
                                 return (
-                                    <TabComponent key={i} onPress={onTabPress} tab={tab} color={(focused ? (tab.icon?.tabbarStyle?.overrideFocusedColor || focusedIconColor) : tab.icon?.tabbarStyle?.overrideColor) || iconColor || theme?.text || "#FFFFFF"} size={iconSize} focused={focused} theme={theme} labelStyle={labelStyle}/>
+                                    <TabComponent 
+                                        key={i} 
+                                        onPress={onTabPress} 
+                                        tab={tab} 
+                                        color={(focused ? (tab.icon?.tabbarStyle?.overrideFocusedColor || focusedIconColor) : tab.icon?.tabbarStyle?.overrideColor) || iconColor || theme?.text || "#FFFFFF"} 
+                                        size={iconSize} 
+                                        focused={focused} 
+                                        theme={theme} 
+                                        labelStyle={labelStyle}
+                                    />
                                 )
                             })
                         }
@@ -147,7 +156,16 @@ export const TabNavigator: React.FC<TabNavigatorProps> = ({
                             tabs.map((tab, i) => {
                                 const focused = tab.label == activeTab.label;
                                 return (
-                                    <TabComponent key={i} onPress={onTabPress} tab={tab} color={(focused ? (tab.icon?.tabbarStyle?.overrideFocusedColor || focusedIconColor) : tab.icon?.tabbarStyle?.overrideColor) || iconColor || theme?.text || "#FFFFFF"} size={iconSize} focused={focused} theme={theme} labelStyle={labelStyle}/>
+                                    <TabComponent 
+                                        key={i} 
+                                        onPress={onTabPress} 
+                                        tab={tab} 
+                                        color={(focused ? (tab.icon?.tabbarStyle?.overrideFocusedColor || focusedIconColor) : tab.icon?.tabbarStyle?.overrideColor) || iconColor || theme?.text || "#FFFFFF"} 
+                                        size={iconSize} 
+                                        focused={focused} 
+                                        theme={theme} 
+                                        labelStyle={labelStyle}
+                                    />
                                 )
                             })
                         }

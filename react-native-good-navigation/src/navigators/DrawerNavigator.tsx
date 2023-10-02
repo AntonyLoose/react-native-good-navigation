@@ -127,13 +127,13 @@ export const DrawerNavigator: React.FC<DrawerProps> = ({
                         drawerStyle={drawerStyle}
                         toggleDrawerIcon={toggleDrawerIcon}
                         drawerTitleStyle={drawerTitleStyle}
+                        labelStyle={labelStyle}
                         drawerTabFocusedStyle={drawerTabFocusedStyle}
                         drawerTabUnfocusedStyle={drawerTabUnfocusedStyle}
                     />
                 )
             }
 
-            {/* Sidebar */}
             {
                 activeTab.sidebar == undefined ? undefined : (
                     <Sidebar 
@@ -225,6 +225,9 @@ export const DrawerNavigator: React.FC<DrawerProps> = ({
     )
 }
 
+
+
+
 interface DrawerComponentProps {
     borderColor: string;
     tabs: Tab[];
@@ -241,6 +244,7 @@ interface DrawerComponentProps {
         size?: number
     };
     drawerTitleStyle?: TextStyle;
+    labelStyle?: TextStyle;
     drawerTabFocusedStyle?: DrawerTabStyle;
     drawerTabUnfocusedStyle?: DrawerTabStyle;
 
@@ -258,6 +262,7 @@ const Drawer: React.FC<DrawerComponentProps> = ({
     drawerStyle,
     toggleDrawerIcon,
     drawerTitleStyle,
+    labelStyle,
     drawerTabFocusedStyle,
     drawerTabUnfocusedStyle
 }) => {
@@ -347,6 +352,9 @@ const Drawer: React.FC<DrawerComponentProps> = ({
     )
 }
 
+
+
+
 interface EmptyScreenProps {
     theme?: Theme;
     style?: ViewStyle;
@@ -382,6 +390,9 @@ const EmptyScreen: React.FC<EmptyScreenProps> = ({
         </View>
     )
 }
+
+
+
 
 interface TabProps {
     tab: Tab;
@@ -446,6 +457,9 @@ const TabComponent: React.FC<TabProps> = ({ tab, onPress, focused=false, iconSty
         </View>
     )
 }
+
+
+
 
 interface SidebarProps {
     Screen: React.FC;
